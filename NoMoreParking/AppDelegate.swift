@@ -13,10 +13,13 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    static let gpsInstance: GPSManager? = GPSManager(desiredSignalStrength: .Strong)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        debugPrint("Starting gps")
+        AppDelegate.gpsInstance!.startGPS()
+        debugPrint("gps running")
         return true
     }
 

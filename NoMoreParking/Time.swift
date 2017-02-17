@@ -1,0 +1,85 @@
+//
+//  Time.swift
+//  NoMoreParking
+//
+//  Created by Ray Tso on 1/6/17.
+//  Copyright © 2017 Ray Tso. All rights reserved.
+//
+
+import Foundation
+import ImageIO
+
+class Time {
+    var hour: String?
+    var minute: String?
+    var year: String?
+    var month: String?
+    var day: String?
+    
+    init(data: Data?) {
+        retriveTimeDataValueFromImageDataSource(dataSourceToRetrieve: data)
+    }
+    
+    private var retrievedDateString: String? {
+        didSet {
+            let components = retrievedDateString!.components(separatedBy: ":")
+            self.year = components[0]
+            self.month = components[1]
+            self.day = components[2]
+            debugPrint(year!)
+            debugPrint(month!)
+            debugPrint(day!)
+        }
+    }
+    private var retrievedTimeString: String? {
+        didSet {
+            let components = retrievedTimeString!.components(separatedBy: ":")
+            self.hour = components[0]
+            self.minute = components[1]
+            debugPrint(hour!)
+            debugPrint(minute!)
+        }
+    }
+    private var timeStamp: String? {
+        didSet {
+            guard timeStamp != nil else {
+                return
+            }
+            let array = timeStamp!.components(separatedBy: " ") //array[0] is date [1] is time
+            retrievedDateString = array[0]
+            retrievedTimeString = array[1]
+            debugPrint("Captured date = \(retrievedDateString)")
+            debugPrint("Captured time = \(retrievedTimeString)")
+        }
+    }
+    
+    func getFullTime() -> String? {
+        guard hour != nil && minute != nil else {
+            return nil
+        }
+        let fullTime = "\(hour!)" + ":" + "\(minute!)"
+        return fullTime // 23:08
+    }
+    
+    func getFullDate() -> String? {
+        guard year != nil && month != nil && day != nil else { return nil }
+        let fullDate = "\(year!)" + "-" + "\(month!)" + "-" + "\(day!)"
+        return fullDate // 2017-01-02
+    }
+    
+    private func retriveTimeDataValueFromImageDataSource(dataSourceToRetrieve: Data?) {
+        guard dataSourceToRetrieve != nil else { return }
+        let cgData = CGImageSourceCreateWithData(dataSourceToRetrieve as! CFData, nil)
+        guard cgData != nil else { return }
+        if let imgProperties = CGImageSourceCopyPropertiesAtIndex(cgData!, 0, nil) as? Dictionary<String, AnyObject> {
+            let exif = imgProperties["{Exif}"] as? Dictionary<String, AnyObject>
+            timeStamp = exif?["DateTimeOriginal"] as? String
+            debugPrint("timestamp = \(timeStamp)")
+        } else {
+            debugPrint("No properties")
+        }
+//        CFRelease(<#T##cf: CFTypeRef!##CFTypeRef!#>)
+    }
+}
+
+
