@@ -10,13 +10,13 @@ import UIKit
 
 class SubmitViewViewController: UIViewController, ViolationFormMetadataDataSource, UITextFieldDelegate {
     
-    // VFDSProtocol
+    // MARK: - VFDSProtocol
     func filesToUploadForViolationForm(sender: ViolationForm) -> [UploadFile]? {
         return filesToUpload
     }
     
-    // Outlets and Actions
-    @IBOutlet weak var submitButton: UIButton!
+    // MARK: - Outlets and Actions
+    
     @IBOutlet weak var timeLabel: UILabel! {
         didSet {
             time = Time(data: filesToUpload?[0].content)
@@ -24,33 +24,29 @@ class SubmitViewViewController: UIViewController, ViolationFormMetadataDataSourc
         }
     }
     
-//    if inputCarPlateNumber.hasText {
-//    targetCarPlateNumber = inputCarPlateNumber.text
-//    }
-    
-    
+    @IBOutlet weak var submitButton: UIButton!
     @IBAction func submitButton(_ sender: Any) {
         createForm()
         submitButtonPushed()
     }
+    
     @IBOutlet weak var inputCarPlateNumber: UITextField!
     @IBOutlet weak var violationLocationTextField: UITextField! {
         didSet {
-//            gpsTest.startGPS()
             targetAddress = Address()
             AppDelegate.gpsInstance?.address = targetAddress
-//            AppDelegate.gpsInstance?.address = targetAddress
-            
         }
     }
+    @IBOutlet weak var gpsSignalWeakWarning: UILabel!
+//        checkWeakSignalWarning()
+    
     @IBAction func inputCarPlateNumberTouchAction(_ sender: Any) {
-        violationLocationTextField.text = targetAddress?.getFullAddress()
+        
     }
     
     
-    // Variables
+    // MARK: - Variables
     var filesToUpload: [UploadFile]?
-//    var gpsTest = GPSManager(desiredSignalStrength: .Strong)
     private var form: ViolationForm? {
         didSet {
             form?.dataSource = self
@@ -59,13 +55,36 @@ class SubmitViewViewController: UIViewController, ViolationFormMetadataDataSourc
     private var targetCarPlateNumber: String? //user input
     private var time: Time? // get
     private var targetAddress: Address? // user input or gps
+    private var weakSignal: Bool = true
 //    private var addressDetails: String? // user input or gps
     
     //UITextFieldDelegate
     
     
     
-    // UDF
+    
+    // MARK: - UDFs
+    private func checkGPSStrength() {
+        
+    }
+    
+    @objc private func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
+    private func checkWeakSignalWarning() {
+        if AppDelegate.gpsInstance?.signalStrength == GPSSignalStrength.Low {
+            weakSignal = true
+//            gpsSignalWeakWarning.text = "GPS訊號太過微弱，無法抓取準確地址"
+//            gpsSignalWeakWarning.isHidden = false
+        }
+        else {
+            weakSignal = false
+//            gpsSignalWeakWarning.text = nil
+//            gpsSignalWeakWarning.isHidden = true
+        }
+    }
+    
     private func submitButtonPushed() {
         let req = FormSessionRequest()
         // wheel start
@@ -96,13 +115,45 @@ class SubmitViewViewController: UIViewController, ViolationFormMetadataDataSourc
 //        filesToUpload?.append(targetFile)
 //    }
     
+    // MARK: - View cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard(_:)))
+        self.view.addGestureRecognizer(tap)
     }
     
     override func viewWillAppear(_ animated: Bool) {
 //        violationLocationTextField.text = targetAddress?.getFullAddress()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.checkWeakSignalWarning()
+            if self.weakSignal {
+                DispatchQueue.main.async {
+                    self.gpsSignalWeakWarning.text = "GPS訊號太過微弱，無法抓取準確地址"
+                }
+            }
+            else {
+                DispatchQueue.main.async {
+                    self.gpsSignalWeakWarning.text = nil
+                }
+            }
+            var sscache: GPSSignalStrength?
+            repeat {
+//                checkGPSStrength()
+                sscache = AppDelegate.gpsInstance?.signalStrength
+                guard sscache != nil && sscache != GPSSignalStrength.Low else { continue }
+                DispatchQueue.main.async {
+                    guard !self.violationLocationTextField.isEditing else { return }
+                    self.violationLocationTextField.text = self.targetAddress?.getFullAddress()
+                }
+                if AppDelegate.gpsInstance!.isGPSRunning {
+                    AppDelegate.gpsInstance!.stopGPS()
+                }
+            } while (sscache == GPSSignalStrength.Low || sscache == nil)
+        }
     }
 
     override func didReceiveMemoryWarning() {

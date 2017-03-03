@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		711913611DB623A900356989 /* PhotoCaptureDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711913601DB623A900356989 /* PhotoCaptureDelegate.swift */; };
 		7143C1D71E488FA5002F4B35 /* GPS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7143C1D61E488FA5002F4B35 /* GPS.swift */; };
+		71457A8D1E6978FC008093A2 /* CustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71457A8C1E6978FC008093A2 /* CustomFlowLayout.swift */; };
+		71480D001E5EF73A00D717A2 /* ConfirmPictureImageSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71480CFF1E5EF73A00D717A2 /* ConfirmPictureImageSelectionCollectionViewCell.swift */; };
+		71480D021E6458D900D717A2 /* ConfirmPictureImageSelectionCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71480D011E6458D900D717A2 /* ConfirmPictureImageSelectionCollectionView.swift */; };
 		715BE6621D82ECA200C0E928 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715BE6611D82ECA200C0E928 /* AppDelegate.swift */; };
 		715BE6671D82ECA200C0E928 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 715BE6651D82ECA200C0E928 /* Main.storyboard */; };
 		715BE66A1D82ECA200C0E928 /* NoMoreParking.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 715BE6681D82ECA200C0E928 /* NoMoreParking.xcdatamodeld */; };
@@ -22,7 +25,6 @@
 		715F58291D91455000FFFA53 /* ConfirmPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715F58281D91455000FFFA53 /* ConfirmPopoverViewController.swift */; };
 		715F582B1D91D6F600FFFA53 /* AppMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715F582A1D91D6F600FFFA53 /* AppMenuViewController.swift */; };
 		719626831DEC719C008D367F /* SubmitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719626821DEC719C008D367F /* SubmitData.swift */; };
-		719626851DED9FD3008D367F /* submitJS.js in Resources */ = {isa = PBXBuildFile; fileRef = 719626841DED9FD3008D367F /* submitJS.js */; };
 		719F8AAA1DDA1260008F7764 /* ImageAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719F8AA91DDA1260008F7764 /* ImageAnalysis.swift */; };
 		719F8AAC1DDA1274008F7764 /* MetaDataRetrieve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719F8AAB1DDA1274008F7764 /* MetaDataRetrieve.swift */; };
 		71A037311E1FA67D00FBCB2B /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A037301E1FA67D00FBCB2B /* Time.swift */; };
@@ -30,6 +32,8 @@
 		71BEAEC61E13E3F90070FDF2 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BEAEC51E13E3F90070FDF2 /* Address.swift */; };
 		71BEAEC81E1586F20070FDF2 /* FormRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BEAEC71E1586F20070FDF2 /* FormRequest.swift */; };
 		71DF73F71D8BF8C60067E83B /* CameraViewFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DF73F61D8BF8C60067E83B /* CameraViewFeed.swift */; };
+		71FE79C61E66C29F00AFE422 /* SelectedMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FE79C51E66C29F00AFE422 /* SelectedMaskView.swift */; };
+		71FE79C81E66C45F00AFE422 /* SelectedMaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71FE79C71E66C45F00AFE422 /* SelectedMaskView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +56,9 @@
 /* Begin PBXFileReference section */
 		711913601DB623A900356989 /* PhotoCaptureDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptureDelegate.swift; sourceTree = "<group>"; };
 		7143C1D61E488FA5002F4B35 /* GPS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPS.swift; sourceTree = "<group>"; };
+		71457A8C1E6978FC008093A2 /* CustomFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFlowLayout.swift; sourceTree = "<group>"; };
+		71480CFF1E5EF73A00D717A2 /* ConfirmPictureImageSelectionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmPictureImageSelectionCollectionViewCell.swift; sourceTree = "<group>"; };
+		71480D011E6458D900D717A2 /* ConfirmPictureImageSelectionCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmPictureImageSelectionCollectionView.swift; sourceTree = "<group>"; };
 		715BE65E1D82ECA200C0E928 /* NoMoreParking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoMoreParking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		715BE6611D82ECA200C0E928 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		715BE6661D82ECA200C0E928 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -79,6 +86,8 @@
 		71BEAEC51E13E3F90070FDF2 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		71BEAEC71E1586F20070FDF2 /* FormRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormRequest.swift; sourceTree = "<group>"; };
 		71DF73F61D8BF8C60067E83B /* CameraViewFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewFeed.swift; sourceTree = "<group>"; };
+		71FE79C51E66C29F00AFE422 /* SelectedMaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedMaskView.swift; sourceTree = "<group>"; };
+		71FE79C71E66C45F00AFE422 /* SelectedMaskView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectedMaskView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +143,11 @@
 				715BE6651D82ECA200C0E928 /* Main.storyboard */,
 				715F582A1D91D6F600FFFA53 /* AppMenuViewController.swift */,
 				715F58281D91455000FFFA53 /* ConfirmPopoverViewController.swift */,
+				71457A8C1E6978FC008093A2 /* CustomFlowLayout.swift */,
+				71480D011E6458D900D717A2 /* ConfirmPictureImageSelectionCollectionView.swift */,
+				71480CFF1E5EF73A00D717A2 /* ConfirmPictureImageSelectionCollectionViewCell.swift */,
+				71FE79C51E66C29F00AFE422 /* SelectedMaskView.swift */,
+				71FE79C71E66C45F00AFE422 /* SelectedMaskView.xib */,
 				7143C1D61E488FA5002F4B35 /* GPS.swift */,
 				715F58261D90A8DC00FFFA53 /* LicensePlateAnalyzer.swift */,
 				715F58241D8F0BE000FFFA53 /* SubmitViewViewController.swift */,
@@ -297,9 +311,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				715BE66F1D82ECA200C0E928 /* LaunchScreen.storyboard in Resources */,
+				71FE79C81E66C45F00AFE422 /* SelectedMaskView.xib in Resources */,
 				715BE66C1D82ECA200C0E928 /* Assets.xcassets in Resources */,
 				715BE6671D82ECA200C0E928 /* Main.storyboard in Resources */,
-				719626851DED9FD3008D367F /* submitJS.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,11 +342,15 @@
 				715F58251D8F0BE000FFFA53 /* SubmitViewViewController.swift in Sources */,
 				715BE66A1D82ECA200C0E928 /* NoMoreParking.xcdatamodeld in Sources */,
 				719626831DEC719C008D367F /* SubmitData.swift in Sources */,
+				71457A8D1E6978FC008093A2 /* CustomFlowLayout.swift in Sources */,
+				71480D001E5EF73A00D717A2 /* ConfirmPictureImageSelectionCollectionViewCell.swift in Sources */,
 				71A037311E1FA67D00FBCB2B /* Time.swift in Sources */,
 				719F8AAA1DDA1260008F7764 /* ImageAnalysis.swift in Sources */,
+				71FE79C61E66C29F00AFE422 /* SelectedMaskView.swift in Sources */,
 				715F582B1D91D6F600FFFA53 /* AppMenuViewController.swift in Sources */,
 				71BEAEC81E1586F20070FDF2 /* FormRequest.swift in Sources */,
 				71BEAEC61E13E3F90070FDF2 /* Address.swift in Sources */,
+				71480D021E6458D900D717A2 /* ConfirmPictureImageSelectionCollectionView.swift in Sources */,
 				715BE6621D82ECA200C0E928 /* AppDelegate.swift in Sources */,
 				719F8AAC1DDA1274008F7764 /* MetaDataRetrieve.swift in Sources */,
 				715BE6931D82FA6E00C0E928 /* CameraViewController.swift in Sources */,

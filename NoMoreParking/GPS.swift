@@ -13,6 +13,21 @@ class GPSManager: NSObject, CLLocationManagerDelegate, AddressClassDatasource
 {
     private var locationManager: CLLocationManager = CLLocationManager()
     private var signalStrengthThreshold: GPSSignalStrength
+    var isGPSRunning: Bool = false
+    var signalStrength: GPSSignalStrength? {
+        guard myLocation != nil else {
+            return nil
+        }
+        if myLocation!.horizontalAccuracy.binade > 200.0 {
+            return GPSSignalStrength.Low
+        }
+        else if myLocation!.horizontalAccuracy > 80.0 {
+            return GPSSignalStrength.Moderate
+        }
+        else {
+            return GPSSignalStrength.Strong
+        }
+    }
     weak var address: Address? {
         didSet {
             address?.dataSource = self
@@ -32,10 +47,16 @@ class GPSManager: NSObject, CLLocationManagerDelegate, AddressClassDatasource
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+        isGPSRunning = true
     }
     
     func stopGPS() {
         locationManager.stopUpdatingLocation()
+        isGPSRunning = false
+    }
+    
+    func refresh() {
+        locationManager.requestLocation()
     }
     
     func locationDataForAddressClass(sender: Address) -> CLLocation? {
@@ -47,13 +68,6 @@ class GPSManager: NSObject, CLLocationManagerDelegate, AddressClassDatasource
         let latestLocation = locations[locations.count - 1]
         debugPrint(latestLocation)
         debugPrint(latestLocation.horizontalAccuracy)
-//        guard latestLocation.horizontalAccuracy <= 100.0 else {
-////            locationManager.allowDeferredLocationUpdates(untilTraveled: CLLocationDistanceMax, timeout: 3.0)
-//            return
-//        }
-//        let lat: CLLocationDegrees = 24.964319
-//        let lng: CLLocationDegrees = 121.190655
-//        latestLocation = CLLocation.init(latitude: lat, longitude: lng)
         myLocation = latestLocation
         debugPrint("GPS = \(myLocation)")
     }
