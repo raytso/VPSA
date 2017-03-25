@@ -1,0 +1,6 @@
+framework module Pods_NoMoreParkingUITests {
+  umbrella header "Pods-NoMoreParkingUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

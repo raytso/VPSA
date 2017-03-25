@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NoMoreParking/AppMenuTabBarViewController.swift"
+            timestampString = "512065015.791876"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "TabBarControllers"
+            landmarkType = "13">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NoMoreParking.AppMenuTabBarViewController.TabBarControllers.rawValue.getter : Swift.Int"
+                  moduleName = "NoMoreParking"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Ray/Documents/Xcode%20Projects/NoMoreParking/NoMoreParking/AppMenuTabBarViewController.swift"
+                  timestampString = "512154737.992993"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "68">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NoMoreParking.AppMenuTabBarViewController.TabBarControllers.init (rawValue : Swift.Int) -&gt; Swift.Optional&lt;NoMoreParking.AppMenuTabBarViewController.TabBarControllers&gt;"
+                  moduleName = "NoMoreParking"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Ray/Documents/Xcode%20Projects/NoMoreParking/NoMoreParking/AppMenuTabBarViewController.swift"
+                  timestampString = "512154737.995397"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

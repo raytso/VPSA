@@ -33,7 +33,7 @@ class ConfirmPictureImageSelectionCollecterViewCell: UICollectionViewCell {
 //        backgroundView?.layer.masksToBounds = true
 //        backgroundView?.layer.borderColor = UIColor.darkGray.cgColor
 //        backgroundView?.layer.borderWidth = 1.0
-        
+        self.layer.masksToBounds = false
 //        self.layer.cornerRadius = 10.0
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowOpacity = 0.7
@@ -42,6 +42,6 @@ class ConfirmPictureImageSelectionCollecterViewCell: UICollectionViewCell {
         self.layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
 //        let path = UIBezierPath(roundedRect: self.bounds, cornerRadius: 12.0).cgPath
 //        self.layer.shadowPath = path
-        self.layer.masksToBounds = false
+        
     }
 }

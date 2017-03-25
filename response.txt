@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- start print -->
+<html lang="zh-TW">
+
+<head>
+  <title>臺北市政府警察局-中文版</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon" /> 
+  
+  <meta name='DC.Title' content='台北市政府警察局' />
+					<meta name='DC.Creator' content='台北市政府警察局' />
+					<meta name='DC.Subject' content='台北市政府警察局' />
+					<meta name='DC.Description' content='台北市政府警察局' />
+					<meta name='DC.Contributor' content='台北市政府警察局' />
+					<meta name='DC.Type' content='Type' />
+					<meta name='DC.Format' content='Text' />
+					<meta name='DC.Source' content='台北市政府警察局' />
+					<meta name='DC.Language' content='中文' />
+					<meta name='DC.Coverage' content='中華民國（台灣）' />
+					<meta name='DC.Publisher' content='台北市政府警察局' />
+					<meta name='DC.Date' content='2017-03-16' />
+					<meta name='DC.Identifier' content='360000000G' />
+					<meta name='DC.Relation' content='http://www.pcc.gov.tw' />
+					<meta name='DC.Rights' content='台北市政府警察局 著作權聲明' />
+					<meta name='Category.Theme' content='170' />
+					<meta name='Category.Cake' content='14Z' />
+					<meta name='Category.Service' content='EZ0' />
+					<meta http-equiv='x-frame-options' content='ALLOW-FROM http://police.gov.taipei'>
+				
+  <script language="javascript">
+  <!--
+	var _CurrentURL		= '/tcpd/cht/index.php?act=traffic';
+	var _RequestURI		= '/tcpd/cht/index.php?act=traffic&code=add';
+	var _PHP_SELF		= '/tcpd/cht/index.php';
+        var _RequestURIEN       = '%2Ftcpd%2Fcht%2Findex.php%3Fact%3Dtraffic%26code%3Dadd'
+	var OrderURL		= '/tcpd/cht/index.php?act=traffic&code=add'; 
+	var CurOrderField	= '';
+	var CurOrderMode	= '';
+	
+	var lang_notnull	= '不能為空';
+	var lang_neednumeric	= '只能輸入數字';
+	var lang_needaccount	= '只能輸入英文大小寫和數字';
+	var lang_needtel	= '不正確的電話號碼格式';
+	var lang_uid		= '不正確的身分證格式';
+	var lang_needfloat	= '必須輸入整數或小數';
+	var lang_needemail	= '不正確的EMAIL地址格式';
+	var lang_neededate	= '不正確的日期格式';
+	var lang_nosel		= '請先選擇要管理的資料';
+	var lang_opt_confirm	= '是否確認對選定項目進行此管理?';
+	var lang_logout_confirm	= '是否確定離開管理系統?';
+	var lang_delete_confirm	= '是否確定要刪除此項目?';
+	var lang_minlength	= '最少字符數為: ';
+	var lang_maxlength	= '最大字符數為: ';
+	var lang_err_fileformat	= '上傳了無效的檔案格式, 只能上傳: %s 類型的檔案';
+  -->
+  </script>
+  <script language="javascript" src="../js/jquery-1.6.4.js"></script>
+  <script type="text/javascript" src="../js/jquery.tools.min.js"></script>
+  <style type="text/css">
+    .error {
+  /* supply height to ensure consistent positioning for every browser */
+  height: 15px;
+  background-color: #FFFE36;
+  border: 1px solid #E1E16D; 
+  font-size: 13px;
+  color: #000;
+  padding: 3px 10px;
+  margin-left: -2px;
+  display: none;	
+  /* CSS3 spicing for mozilla and webkit */
+  -moz-border-radius:4px;
+  -webkit-border-radius:4px;
+  -moz-border-radius-bottomleft:0;
+  -moz-border-radius-topleft:0;
+  -webkit-border-bottom-left-radius:0;
+  -webkit-border-top-left-radius:0;
+
+  -moz-box-shadow:0 0 6px #ddd;
+  -webkit-box-shadow:0 0 6px #ddd;
+}
+.error p {
+	margin: 0;
+}
+
+  </style>
+</head>
+
+<script language="javascript" src="../js/common.js"></script>
+<script language="javascript" src="../js/swfobject.js"></script>
+<link rel="stylesheet" href="../js/calendar/calendar-mos.css">
+<script language="javascript" src="../js/calendar/calendar.js"></script>
+<script language="javascript" src="../js/calendar/lang/calendar-en.js"></script>
+<link href='../js/menu/ThemeOffice/theme.css' rel='stylesheet' />
+<script type='text/javascript' src='../js/menu/JSCookMenu.js'></script>
+<script type='text/javascript' src='../js/menu/ThemeOffice/theme.js'></script>
+<link rel="stylesheet" href="../upload/cache/css100.css">
+<script language="javascript">
+<!--
+	var calendar = null;
+
+	function selected(cal, date) {
+		cal.sel.value = date;
+	}
+
+	function closeHandler(cal) {
+		cal.hide();
+		Calendar.removeEvent(document, "mousedown", checkCalendar);
+	}
+
+	function checkCalendar(ev) {
+		var el = Calendar.is_ie ? Calendar.getElement(ev) : Calendar.getTargetElement(ev);
+
+		for (; el != null; el = el.parentNode)
+		if (el == calendar.element || el.tagName == "A") break;
+		if (el == null) {
+			calendar.callCloseHandler();
+			Calendar.stopEvent(ev);
+		}
+	}
+
+	function showCalendar(id) {
+		var el = document.getElementById(id);
+		var cal = new Calendar(true, null, selected, closeHandler);
+
+		calendar = cal;	
+		cal.setRange(1900, 2070);
+		calendar.create();
+
+		calendar.sel = el;
+		calendar.showAtElement(el);
+
+		Calendar.addEvent(document, "mousedown", checkCalendar);
+	}
+//-->	
+</script>
+
+
+<!-- end print -->
+
+
+<body topmargin="0" leftmargin="0">
+<table border="0" cellspacing="0" summary="*" cellpadding="0" width="100%" align="center" class="empty-style-flag">
+    <tbody>
+        <tr>
+            <td valign="top" align="right">
+            <p align="left">
+<table cellspacing="0" cellpadding="0" summary="*" border="0" class="emtpy-in-flag" width="100%">
+    <tbody>
+       <tr>
+            <td valign="top" align="left"><style type="text/css">
+<!--
+.word_title01 {
+	color: #00588C;
+	font-weight: bold;
+}
+a:link {
+	color: #663300;
+	text-decoration: none;
+}
+a:hover {
+	color: #C270C2;
+}
+a:visited {
+	color: #996699;
+	text-decoration: none;
+}
+a:active {
+	color: #C270C2; 
+	text-decoration: underline;
+}
+td {
+  color: #555555;
+}
+-->
+</style>
+<table border="0" align="center" cellspacing="1" cellpadding="4" width="95%">
+    <tbody>
+        <tr>
+            <td>
+            <p class="word_title01">親愛的市民 test 您好：</p>
+            <p>您檢舉的交通違規案件已提交成功（案件編號 201703161187 查詢識別碼 cMAQiX）<br/>
+我們會盡快處理，並祝您平安．健康．快樂。</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div style="text-align: center;">
+   <input type="button" name="繼續填寫" value="繼續填寫" onclick="location.href='../index.php?act=traffic&code=add&username=test&ssn=&address_1=台北市中正區八德路一段1000號&phone_1=0987654321&email=test123@aaa.com'"/>
+   <input type="button" name="離開" value="離開"  onclick="CloseWin()"/>
+</div>
+<script type="text/javascript">
+function CloseWin() 
+{ 
+var ua=navigator.userAgent 
+var ie=navigator.appName=="Microsoft Internet Explorer"?true:false 
+if(ie){ 
+    var IEversion=parseFloat(ua.substring(ua.indexOf("MSIE ")+5,ua.indexOf(";",ua.indexOf("MSIE ")))) 
+ if(IEversion< 5.5){ 
+    var str  = '<object id=noTipClose classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11">' 
+    str += '<param name="Command" value="Close"></object>'; 
+    document.body.insertAdjacentHTML("beforeEnd", str); 
+    document.all.noTipClose.Click(); 
+    } 
+    else{ 
+    window.opener =null; 
+    window.close(); 
+    } 
+} 
+else{ 
+window.close() 
+} 
+}
+</script></td>
+        </tr>
+    </tbody>
+</table></p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<!--
+<p align="center">
+
+-->
+</body>
+
+</html>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-5542846-1");
+pageTracker._trackPageview();
+</script>

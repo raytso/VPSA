@@ -12,6 +12,15 @@ class AppMenuViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        let file = Bundle.main.path(forResource: "response", ofType: "txt")
+//        do {
+//            let response = try String(contentsOfFile: file!, encoding: .utf8)
+//            let result = Parser().parse(data: response, dataType: .HTML)
+//        } catch {
+//            debugPrint(error)
+//        }
+        
 
         // Do any additional setup after loading the view.
     }

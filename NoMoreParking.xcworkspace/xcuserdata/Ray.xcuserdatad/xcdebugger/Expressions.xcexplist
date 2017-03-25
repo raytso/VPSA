@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "HistoryViewController.navBar.setter:HistoryViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "shadowBuffer">
+            </PersistentString>
+            <PersistentString
+               value = "historyDataTable">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AppMenuTabBarViewController.setupTabBar() -&gt; ():AppMenuTabBarViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "historyDatas">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HistoryViewController.init(coder : NSCoder) -&gt; HistoryViewController?:HistoryViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "historyDataTable">
+            </PersistentString>
+            <PersistentString
+               value = "shadowBuffer">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "mach_msg_trap:(null)">
+         <PersistentStrings>
+            <PersistentString
+               value = "dataTable">
+            </PersistentString>
+            <PersistentString
+               value = "historyDatas">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

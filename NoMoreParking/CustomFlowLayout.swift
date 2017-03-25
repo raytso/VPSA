@@ -15,8 +15,6 @@ class CustomFlowLayout: UICollectionViewFlowLayout, UIScrollViewDelegate {
     
     private var imageCellCenterInset: CGFloat {
         return (UIScreen.main.bounds.width - (self.itemSize.width)) / 2
-//        return self.collectionView!.frame.width / 2
-//        return UIScreen.main.bounds.width / 2
     }
     
     private let flickVelocity: CGFloat = 0.3

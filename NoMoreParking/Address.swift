@@ -9,8 +9,12 @@
 import Foundation
 import CoreLocation
 
-protocol AddressClassDatasource {
+protocol AddressClassDatasource: class {
     func locationDataForAddressClass(sender: Address) -> CLLocation?
+}
+
+protocol AddressClassDelegate: class {
+    func geocodeRecieved(succeeded: Bool)
 }
 
 class Address {
@@ -27,54 +31,102 @@ class Address {
                                                                     "115" : "南港區", 
                                                                     "116" : "文山區",]
     var city: String? {
-        return placemark?.subAdministrativeArea
+        return (placemark?.subAdministrativeArea == nil) ? nil : placemark!.subAdministrativeArea!
     }
     
-    private var districtName: String? {
+    var districtName: String? {
+        guard districtNumber != nil else { return nil}
         return taipeiCityDistrictDictionary[districtNumber!]
     }
     
     var districtNumber: String? {
-        return placemark?.postalCode
+        return (placemark?.postalCode == nil) ? nil : placemark!.postalCode!
     }
     
     var street: String? {
-        return placemark?.thoroughfare
+        return (placemark?.thoroughfare == nil) ? nil : placemark!.thoroughfare!
     }
     
-    var details: String?
+    var details: String? {
+        return (placemark?.subThoroughfare == nil) ? nil : placemark!.subThoroughfare! + "號"
+    }
+    
+//    var streetName: String? {
+//        return (placemark?.name == nil) ? nil : placemark!.name!
+//    }
+    
+    private var isRequesting: Bool = false
+    
     private var placemark: CLPlacemark?
+    
     private var location: CLLocation? {
         didSet {
             reverseGeoLocation(latestLocation: location)
         }
     }
-    var dataSource: AddressClassDatasource? {
-        didSet {
-            setDataFromGPSLocationManager()
-        }
-    }
+    
+    weak var dataSource: AddressClassDatasource?
+    
+    weak var delegate: AddressClassDelegate?
     
     func getFullAddress() -> String? {
         guard (districtNumber != nil),
               (city != nil),
-              (districtName != nil),
-              (street != nil) else { return nil }
+              (districtName != nil) else { return nil }
         
-        return "\(districtNumber!)" + "\(city!)" + "\(districtName!)" + "\(street!)" + "\(details ?? "")"
+        let street = self.street ?? ""
+        
+        let details = self.details ?? ""
+        
+        return "\(districtNumber!)" + "\(city!)" + "\(districtName!)" + "\(street)" + "\(details)"
     }
     
-    private func setDataFromGPSLocationManager() {
+    func getAnnotationCalloutText() -> String? {
+        
+        guard placemark != nil else { return nil }
+        
+        guard (city != nil),
+            (districtName != nil) else { return nil }
+        
+        let street = self.street ?? ""
+        
+        let details = self.details ?? ""
+        
+        let text = "\(city!) \(districtName!)" + "\n" + "\(street)\(details)"
+        return text
+    }
+    
+    func getShortAddress() -> String? {
+        guard (city != nil),
+            (districtName != nil) else { return nil }
+        
+        let street = self.street ?? ""
+        
+        let details = self.details ?? ""
+        
+        return "\(city!)\(districtName!)\(street)\(details)"
+    }
+    
+    func requestGeocoder() {
         self.location = dataSource?.locationDataForAddressClass(sender: self)
     }
     
     private func reverseGeoLocation(latestLocation: CLLocation?) {
-//        guard latestLocation != nil else { return nil }
-        debugPrint(latestLocation?.coordinate ?? 0.87)
-        CLGeocoder().reverseGeocodeLocation(latestLocation!, completionHandler: { (ppplacemarks, error) -> Void in
-            if (ppplacemarks?.count)! > 0 {
-                self.placemark = ppplacemarks![0]
+        guard !isRequesting else { return }
+        CLGeocoder().reverseGeocodeLocation(latestLocation!, completionHandler: { (placemarks, error) -> Void in
+            if error != nil {
+                debugPrint(error!)
+                return
             }
+            
+            if (placemarks?.count)! > 0 {
+                self.placemark = placemarks![0]
+                self.delegate?.geocodeRecieved(succeeded: true)
+            } else {
+                self.delegate?.geocodeRecieved(succeeded: false)
+            }
+            self.isRequesting = false
         })
+        isRequesting = true
     }
 }

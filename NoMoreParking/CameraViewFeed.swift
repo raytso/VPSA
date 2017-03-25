@@ -9,6 +9,10 @@
 import Foundation
 import AVFoundation
 
+protocol CameraFeedDelegate: class {
+    func finishedRenderingCapture()
+}
+
 
 class CameraFeed: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapturePhotoCaptureDelegate, CapturedImageDataSource {
 //    private var cameraDataOutput: AVCaptureVideoDataOutput?
@@ -22,6 +26,7 @@ class CameraFeed: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapt
     private var capturePhotoSettings: AVCapturePhotoSettings!
     private var captureDeviceVideoOutput: AVCaptureVideoDataOutput!
     private var capturedImageDataSets: [Data]? = []
+    weak var delegate: CameraFeedDelegate?
     
     // MARK: - Protocols
     
@@ -37,10 +42,6 @@ class CameraFeed: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapt
         case BackCamera
     }
     
-    func initImageDataSets() {
-        capturedImageDataSets = []
-    }
-    
     private func cameraSetup(captureDevicePosition: AVCaptureDevicePosition) {
         var captureDevice: AVCaptureDevice?
         var captureDeviceInput: AVCaptureDeviceInput?
@@ -54,12 +55,21 @@ class CameraFeed: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapt
                                                                        position: captureDevicePosition) {
             for device in discoverySession.devices {
                 // Finding general camera
+                if #available(iOS 10.2, *) {
+                    if device.deviceType == AVCaptureDeviceType.builtInDualCamera {
+                        captureDevice = device
+                        break
+                    }
+                }
+                // Fallback on earlier versions
                 if device.deviceType == AVCaptureDeviceType.builtInWideAngleCamera {
                     captureDevice = device
                     break
                 } else {
                     // Provide any camera that works
+                    break
                 }
+                
             }
             
             // General camera setup
@@ -106,8 +116,8 @@ class CameraFeed: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapt
 
                 }
                 previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+                previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
                 debugPrint("Camera finished setup")
-//                previewLayer?.connection.videoOrientation = AVCaptureVideoOrientation.portrait
             } else {
                 print("Cannot setup camera")
             }
@@ -116,7 +126,6 @@ class CameraFeed: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapt
     
     private func setupPhotoSettings() {
         capturePhotoSettings = AVCapturePhotoSettings.init(format: [AVVideoCodecKey: AVVideoCodecJPEG])
-//        capturePhotoSettings = AVCapturePhotoSettings.init(format: [AVVideoCodecKey: kCMVideoCodecType_JPEG])
         capturePhotoSettings.isAutoStillImageStabilizationEnabled = true
     }
     
@@ -136,13 +145,11 @@ class CameraFeed: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapt
 //    }
 
     func captureImage() {
-        DispatchQueue.global().async { [unowned self] in
-            self.capturePhotoOutput?.capturePhoto(with: self.capturePhotoSettings, delegate: self)
-//            DispatchQueue.global().async {
-//                self.setupPhotoSettings()
-//            }
+        DispatchQueue.global(qos: .utility).async { [unowned self] in
+            let settings = AVCapturePhotoSettings.init(format: [AVVideoCodecKey: AVVideoCodecJPEG])
+            self.capturePhotoOutput?.capturePhoto(with: settings, delegate: self)
         }
-//        self.capturePhotoOutput?.capturePhoto(with: capturePhotoSettings, delegate: self)
+//        setupPhotoSettings()
     }
     
     func capture(_ captureOutput: AVCapturePhotoOutput,
@@ -151,7 +158,6 @@ class CameraFeed: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapt
                  resolvedSettings: AVCaptureResolvedPhotoSettings,
                  bracketSettings: AVCaptureBracketedStillImageSettings?,
                  error: Error?) {
-        
         guard (error == nil) else {
             debugPrint(error!.localizedDescription)
             return
@@ -161,11 +167,7 @@ class CameraFeed: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapt
         let imageData = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: sampleBuffer!,previewPhotoSampleBuffer: previewBuffer)
         capturedImageDataSets?.append(imageData!)
         debugPrint(capturedImageDataSets?.count ?? 0)
-        
-        // Reset settings for multiple capture
-        DispatchQueue.global().async {
-            self.setupPhotoSettings()
-        }
+        delegate?.finishedRenderingCapture()
     }
     
     func captureVideo() {

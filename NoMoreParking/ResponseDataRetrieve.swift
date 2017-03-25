@@ -8,7 +8,6 @@
 
 import Foundation
 
-class MetadataRetriever
-{
+class HTMLParser {
     
 }

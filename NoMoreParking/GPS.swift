@@ -36,6 +36,10 @@ class GPSManager: NSObject, CLLocationManagerDelegate, AddressClassDatasource
     }
     private var myLocation: CLLocation?
     
+    var currentGPSLocation: CLLocation? {
+        get { return myLocation }
+    }
+    
     init(desiredSignalStrength: GPSSignalStrength) {
         // init
         self.signalStrengthThreshold = desiredSignalStrength
@@ -60,14 +64,13 @@ class GPSManager: NSObject, CLLocationManagerDelegate, AddressClassDatasource
     }
     
     func locationDataForAddressClass(sender: Address) -> CLLocation? {
-//        self.address = sender //??
         return myLocation
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let latestLocation = locations[locations.count - 1]
-        debugPrint(latestLocation)
-        debugPrint(latestLocation.horizontalAccuracy)
+//        debugPrint(latestLocation)
+//        debugPrint(latestLocation.horizontalAccuracy)
         myLocation = latestLocation
         debugPrint("GPS = \(myLocation)")
     }
