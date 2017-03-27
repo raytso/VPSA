@@ -14,6 +14,8 @@ protocol ResponseViewDelegate: class {
 
 class ResponseView: UIView {
     
+    // MARK: - IBOutlets
+    
     @IBOutlet weak var statusImageView: UIImageView!
     
     @IBOutlet weak var statusTextLabel: UILabel!
@@ -35,13 +37,17 @@ class ResponseView: UIView {
         delegate?.userDismissedView()
     }
     
-    var contentView: UIView?
+    // MARK: - Properties
     
-    weak var delegate: ResponseViewDelegate?
+    var contentView: UIView?
     
     var blurEffectView: UIVisualEffectView?
     
     var blurEffect: UIBlurEffect?
+    
+    weak var delegate: ResponseViewDelegate?
+    
+    // MARK - UDFs
     
     func updateView(text: String, detailsText: String, image: UIImage) {
         statusTextLabel.text = text
@@ -52,6 +58,8 @@ class ResponseView: UIView {
     func hideButton(toHide: Bool) {
         cancelButton.isHidden = toHide
     }
+    
+    // MARK - Initialization
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -81,7 +89,8 @@ class ResponseView: UIView {
     private func setupView() {
         contentView = loadViewFromXib()
         contentView!.frame = bounds
-        contentView!.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
+        contentView!.autoresizingMask = [UIViewAutoresizing.flexibleWidth,
+                                         UIViewAutoresizing.flexibleHeight]
         addSubview(contentView!)
     }
     
@@ -89,11 +98,6 @@ class ResponseView: UIView {
         blurEffectView?.effect = effect
     }
     
-//    func setViewIsToHide(hidden: Bool) {
-//        UIView.transition(with: self, duration: 0.1, options: .transitionCrossDissolve, animations: {
-//            self.isHidden = hidden
-//        }) { (_) in }
-//    }
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

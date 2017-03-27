@@ -23,18 +23,18 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dkI-cm-2r1">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="408"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check_icon" translatesAutoresizingMaskIntoConstraints="NO" id="yNC-Mw-6if">
-                            <rect key="frame" x="195" y="8" width="36" height="39"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ring" translatesAutoresizingMaskIntoConstraints="NO" id="yNC-Mw-6if">
+                            <rect key="frame" x="195" y="9" width="36" height="36"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="36" id="7jF-BE-41n"/>
-                                <constraint firstAttribute="height" constant="39" id="Hj6-v5-Ubb"/>
+                                <constraint firstAttribute="height" constant="36" id="Hj6-v5-Ubb"/>
                             </constraints>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.64861813583815031" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="yNC-Mw-6if" secondAttribute="trailing" constant="9" id="FTj-Nz-IfR"/>
-                        <constraint firstItem="yNC-Mw-6if" firstAttribute="top" secondItem="dkI-cm-2r1" secondAttribute="top" constant="8" id="Lgy-QU-53Q"/>
+                        <constraint firstItem="yNC-Mw-6if" firstAttribute="top" secondItem="dkI-cm-2r1" secondAttribute="top" constant="9" id="Lgy-QU-53Q"/>
                     </constraints>
                 </view>
             </subviews>
@@ -50,6 +50,6 @@
         </view>
     </objects>
     <resources>
-        <image name="check_icon" width="366" height="401"/>
+        <image name="Ring" width="50" height="50"/>
     </resources>
 </document>

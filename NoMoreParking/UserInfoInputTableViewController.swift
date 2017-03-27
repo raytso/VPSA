@@ -9,54 +9,36 @@
 import UIKit
 
 class UserInfoInputTableViewController: UITableViewController {
+    
+    // MARK: - IBOutlets
 
     @IBOutlet var userInfoTableView: UserInfoInputTableView!
     
-    var userInfo: UserInformation?
+    // MARK: - Properties
+    
+    var userInfo: UserInformation? = UserInformation()
+    
+    struct CellIdentifiers {
+        static let UserInfoType = "userInfoType"
+    }
     
     // MARK: - UDFs
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        debugPrint("Loading userinfo table view controller")
+    private func tableViewSetup() {
         tableView.isScrollEnabled = false
         tableView.separatorStyle = .singleLine
         tableView.separatorInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
         tableView.backgroundColor = UIColor.clear
-        
-        if userInfo == nil {
-            self.userInfo = UserInformation()
-        }
-        // Depends on settings, for now is default
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        debugPrint("userInfo tableview will appear")
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tableViewSetup()
     }
 
     // MARK: - Table view data source
 
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 0
-//    }
-//
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        // #warning Incomplete implementation, return the number of rows
-//        return 0
-//    }
-    struct CellIdentifiers {
-        static let UserInfoType = "userInfoType"
-    }
-
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.cellForRow(at: indexPath)
         cell = UITableViewCell.init(style: .value2, reuseIdentifier: CellIdentifiers.UserInfoType)

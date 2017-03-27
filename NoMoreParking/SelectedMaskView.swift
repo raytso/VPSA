@@ -40,7 +40,6 @@ class SelectedMaskView: UIView {
         contentView!.frame = bounds
         contentView!.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
         addSubview(contentView!)
-        debugPrint("mask set")
     }
     
     func setViewIsToHide(hidden: Bool) {

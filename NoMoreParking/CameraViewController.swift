@@ -19,17 +19,14 @@ class CameraViewController: UIViewController {
     
     @IBAction func capturePhoto(_ captureImageButton: UIButton) {
             self.capture.captureImage()
-//            self.confirmButton.isHidden = false
     }
-//    @IBAction func unwindToCameraView(segue: UIStoryboardSegue){}
+    @IBAction func unwindToCameraView(segue: UIStoryboardSegue) {
+        
+    }
     
     @IBOutlet weak var confirmButton: UIButton!
     
-    private var capturedImageDataSets: [Data?] = []
-    
-//    fileprivate var selectedFiles: [UploadFile]?
-    
-//    fileprivate var selectedFilesInUIImage: [UIImage]?
+//    fileprivate var capturedImageDataSets: [Data?] = []
     
     private var capture = CameraFeed()
     
@@ -40,13 +37,13 @@ class CameraViewController: UIViewController {
 //        submitButton.isHidden = true
         capture.delegate = self
         capture.setupCameraSettings(cameraType: .BackCamera, cameraPreviewFrameSize: UIScreen.main.bounds)
-        capture.startCamera()
         
         if let preview = capture.previewLayer {
             self.view.layer.insertSublayer(preview, below: cameraFeedView.layer)
         }
         
         // start camera?
+        capture.startCamera()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -96,16 +93,14 @@ class CameraViewController: UIViewController {
 }
 
 extension CameraViewController: ConfirmPopoverViewControllerDelegate {
-    func userFinishedSelecting(selectedFiles: [UploadFile], selectedFilesInUIImage: [UIImage]) {
-//        self.selectedFiles = selectedFiles
-//        self.selectedFilesInUIImage = selectedFilesInUIImage
+    func userFinishedSelecting() {
+        confirmButton.isHidden = true
     }
 }
 
 extension CameraViewController: CameraFeedDelegate {
     func finishedRenderingCapture() {
         self.confirmButton.isHidden = false
-//        self.submitButton.isHidden = false
     }
 }
 

@@ -15,17 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    var navigationBarAppearance: UINavigationBar? = UINavigationBar.appearance()
+//    var navigationBarAppearance: UINavigationBar? = UINavigationBar.appearance()
     
     static let gpsInstance: GPSManager? = GPSManager(desiredSignalStrength: .Strong)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        navigationBarAppearance?.setBackgroundImage(UIImage(), for: .default)
-        navigationBarAppearance?.shadowImage = UIImage()
-        navigationBarAppearance?.backgroundColor = UIColor.clear
-        navigationBarAppearance?.isTranslucent = true
-        
         UIApplication.shared.statusBarStyle = .lightContent
         
         debugPrint("Starting gps")

@@ -13,7 +13,7 @@ private let reuseIdentifier = "Cell"
 class SelectedImagesCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var imageSet: [UIImage]?
-    let defaultImage = #imageLiteral(resourceName: "Cancel")
+    let defaultImage = #imageLiteral(resourceName: "error")
     
 
     override func viewDidLoad() {

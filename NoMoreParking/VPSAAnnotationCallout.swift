@@ -19,13 +19,15 @@ protocol VPSAAnnotationDataSource: class {
 
 class VPSAAnnotationCalloutView: UIView {
     
-    // MARK: - IBOutlets / IBActions
+    // MARK: - IBOutlets
     
     @IBOutlet weak var confirmButton: UIButton!
     
     @IBOutlet weak var cancelButton: UIButton!
     
     @IBOutlet weak var addressTextView: UITextView!
+    
+    // MARK: IBActions
     
     @IBAction func userPressingNo(_ sender: Any) {
         cancelButton.backgroundColor = #colorLiteral(red: 0.9476388097, green: 0.1501389742, blue: 0, alpha: 0.08)

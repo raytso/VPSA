@@ -60,7 +60,6 @@ class Parser {
         // for now
         return nil
     }
-
     
     func parse(data: Any, dataType: SupportedDataTypes) -> [String : String]? {
         var result: [String : String]?

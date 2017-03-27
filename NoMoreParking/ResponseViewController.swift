@@ -14,25 +14,29 @@ protocol ResponseViewControllerDelegate: class {
 
 class ResponseViewController: UIViewController {
     
+    // MARK: - IBOutlets
+    
     @IBOutlet weak var responseView: ResponseView!
+    
+    // MARK: - Properties
     
     var state: ResponseViewState = .Waiting {
         didSet {
             if state != .Waiting {
                 responseView.cancelButton.isHidden = false
-//                responseView.hideButton(toHide: false)
-            }
-            if state != .Waiting {
                 responseView.spinningIndicator.stopAnimating()
             }
             updateView(forView: responseView!)
-            
         }
     }
     
     weak var delegate: ResponseViewControllerDelegate?
     
-//    private var responseView: ResponseView?
+    struct SegueIdentifiers {
+        static let BackToForm = "unwindToSubmitForm"
+    }
+    
+    // MARK: - UDFs
 
     private func updateView(forView: UIView) {
         switch forView {
@@ -42,10 +46,11 @@ class ResponseViewController: UIViewController {
         }
     }
     
+    // MARK: - Application Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         responseView.delegate = self
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,14 +66,9 @@ class ResponseViewController: UIViewController {
 }
 
 extension ResponseViewController: ResponseViewDelegate {
-//    internal func finishDisplayingSuccessResponse() {
-//        self.delegate?.normalExit()
-//        self.dismiss(animated: true, completion: nil)
-//    }
-    
-    internal func userDismissedView() {
-        // do sth
+    func userDismissedView() {
         self.delegate?.userForcedExit(state: state)
+//        performSegue(withIdentifier: SegueIdentifiers.BackToForm, sender: nil)
         self.dismiss(animated: true, completion: nil)
     }
 }

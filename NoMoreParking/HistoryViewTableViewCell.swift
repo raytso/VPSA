@@ -20,6 +20,8 @@ class HistoryViewTableViewCell: UITableViewCell {
     
     @IBOutlet weak var caseStatus: UILabel!
     
+    @IBOutlet weak var caseType: UILabel!
+    
     var caseStatusType: CaseStatus = .Pending {
         didSet {
             switch caseStatusType {

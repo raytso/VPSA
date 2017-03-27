@@ -14,6 +14,14 @@ struct ScreenConstants {
     static let Height = UIScreen.main.bounds.height
 }
 
+struct AlertConstants {
+    struct ErrorConst {
+        static let Carplate = "\n車牌號碼有誤"
+        static let Location = "\n地址錯誤"
+        static let Ending = "\n\n請更正之後再重新送出！\n"
+    }
+}
+
 //protocol SubmitViewControllerDelegate: class {
 //    func userDidRecieveSuccessfulData(data: CaseStructure!)
 //}
@@ -78,6 +86,10 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
         performSegue(withIdentifier: SegueIdentifiers.ResponseView, sender: nil)
     }
     
+    @IBAction func unwindToSubmitForm(segue: UIStoryboardSegue) {
+        
+    }
+    
     @IBAction func userCancelForm(_ sender: Any) {
         present(discardDataAlert, animated: true, completion: nil)
     }
@@ -100,12 +112,12 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
     
     var obtainedResults: [String : String]? { didSet { debugPrint(obtainedResults!) } }
     
-//    weak var submitFormDatasource: SubmitViewControllerSubmitDatasource?
+    var userPinnedLocationAddress: Address?
     
     var isTableViewScrolledToTop: Bool = true
     
     private var discardDataAlert: UIAlertController = {
-        let alert = UIAlertController.init(title: "您確定要退出嗎？", message: "\n您會失去已經拍攝的影像及輸入的資料", preferredStyle: .alert)
+        let alert = UIAlertController.init(title: "確定要退出？", message: "\n您會失去已經拍攝的影像及輸入的資料", preferredStyle: .alert)
         return alert
     }()
     
@@ -120,8 +132,6 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
     
     private var userPinnedCLLocation: CLLocation?
     
-    var userPinnedLocationAddress: Address?
-    
     private var placemark: CLPlacemark?
     
     private var userPinnedLocation: CLLocationCoordinate2D? {
@@ -132,32 +142,16 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
         }
     }
     
-    struct Constants {
-        static let TableViewSnapThreshold = ScreenConstants.Height * 0.15
-        static let TableViewInitialOriginY = ScreenConstants.Height * 0.75
-        static let TableViewTopPosition = CGFloat(64.0)
-        static let AnnotationViewReuseIdentifier = "location"
-    }
-    
-    struct AlertConstants {
-        struct ErrorConst {
-            static let Carplate = "\n車牌號碼有誤"
-            static let Location = "\n地址錯誤"
-            static let Ending = "\n請更正之後再重新送出！\n"
-        }
-    }
-    
     // MARK: - UDFs
     
     private func backToCamera() {
-        self.performSegue(withIdentifier: SegueIdentifiers.Exit, sender: nil)
-        self.dismiss(animated: true, completion: nil)
+        self.performSegue(withIdentifier: SegueIdentifiers.Unwind, sender: nil)
     }
     
     private func setupAlertAction(alert: UIAlertController) {
         switch alert {
         case discardDataAlert:
-            let proceed = UIAlertAction.init(title: "確認", style: .destructive) { (_) in
+            let proceed = UIAlertAction.init(title: "確認", style: .destructive) { [unowned self] (_) in
                 self.backToCamera()
             }
             let cancel = UIAlertAction.init(title: "取消", style: .cancel, handler: nil)
@@ -213,11 +207,9 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
     }
     
     func setTableViewFrame() {
-        let newY = Constants.TableViewInitialOriginY
-        let rect = CGRect(x: 0.0,
-                          y: newY,
-                          width: ScreenConstants.Width,
-                          height: ScreenConstants.Height - Constants.TableViewTopPosition)
+        let newY = SubmitViewConstants.TableViewInitialOriginY
+        let rect = CGRect(x: 0.0, y: newY,
+                          width: ScreenConstants.Width, height: ScreenConstants.Height - SubmitViewConstants.TableViewTopPosition)
         tableViewContainerView.frame = rect
     }
     
@@ -227,7 +219,7 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
             self.mapViewMask.alpha = self.mapViewMaskValue(position: position)
             self.tableViewContainerView.frame = CGRect(x: 0.0, y: position, width: frame.width, height: frame.height)
         }) { _ in
-            if position == Constants.TableViewTopPosition {
+            if position == SubmitViewConstants.TableViewTopPosition {
                 // enable scroll
                 self.dataTableViewController?.tableView.isScrollEnabled = true
             }
@@ -236,7 +228,7 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
     
     func mapViewMaskValue(position: CGFloat) -> CGFloat {
         var alpha: CGFloat?
-        if position == Constants.TableViewTopPosition {
+        if position == SubmitViewConstants.TableViewTopPosition {
             alpha = 0.8
             UIApplication.shared.statusBarStyle = .lightContent
         } else {
@@ -252,7 +244,7 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
         let tableContainerViewYPosition = tableViewContainerView.frame.minY
         var isSnapToTop = true
 
-        if (tableContainerViewYPosition == Constants.TableViewTopPosition) {
+        if (tableContainerViewYPosition == SubmitViewConstants.TableViewTopPosition) {
             // check if tableView is scrolled to top
             if isTableViewScrolledToTop {
                 if translation.y > 0 {
@@ -269,10 +261,9 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
                 return
             }
         }
-        
-        if tableContainerViewYPosition < Constants.TableViewTopPosition {
+        else if tableContainerViewYPosition < SubmitViewConstants.TableViewTopPosition {
             UIView.animate(withDuration: 0.15, animations: {
-                self.tableViewContainerView.frame.origin = CGPoint(x: 0.0, y: Constants.TableViewTopPosition)
+                self.tableViewContainerView.frame.origin = CGPoint(x: 0.0, y: SubmitViewConstants.TableViewTopPosition)
             })
             self.scrolledAmount = 0.0
             self.dataTableViewController?.tableView.isScrollEnabled = true
@@ -283,24 +274,19 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
         if recognizer.state == .ended {
             var target: CGFloat
             let startingPosition = tableContainerViewYPosition - scrolledAmount
-            if startingPosition == Constants.TableViewTopPosition {
-                if abs(scrolledAmount) > Constants.TableViewSnapThreshold && scrolledAmount > 0 {
+            if startingPosition == SubmitViewConstants.TableViewTopPosition {
+                if abs(scrolledAmount) > SubmitViewConstants.TableViewSnapThreshold && scrolledAmount > 0 {
                     isSnapToTop = false
                 }
             } else {
                 // Bottom
-                if (abs(scrolledAmount) > Constants.TableViewSnapThreshold && scrolledAmount < 0) {
+                if (abs(scrolledAmount) > SubmitViewConstants.TableViewSnapThreshold && scrolledAmount < 0) {
                     isSnapToTop = true
                 } else {
                     isSnapToTop = false
                 }
             }
-            if isSnapToTop {
-                target = Constants.TableViewTopPosition
-            } else {
-                // to bottom
-                target = Constants.TableViewInitialOriginY
-            }
+            target = isSnapToTop ? SubmitViewConstants.TableViewTopPosition : SubmitViewConstants.TableViewInitialOriginY
             
             scrolledAmount = 0.0
             snapTableViewToPosition(position: target)
@@ -310,8 +296,6 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
         }
         recognizer.setTranslation(CGPoint.zero, in: self.view)
     }
-    
-    
     
     // MARK: - UIGestureRecognizerDelegate
     
@@ -325,10 +309,10 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
         
         if annotation is MKUserLocation { return nil }
         
-        var view = mapView.dequeueReusableAnnotationView(withIdentifier: Constants.AnnotationViewReuseIdentifier)
+        var view = mapView.dequeueReusableAnnotationView(withIdentifier: SubmitViewConstants.AnnotationViewReuseIdentifier)
         
         if view == nil {
-            view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: Constants.AnnotationViewReuseIdentifier)
+            view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: SubmitViewConstants.AnnotationViewReuseIdentifier)
             view?.canShowCallout = true
         } else {
             view?.annotation = annotation
@@ -358,8 +342,6 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
     var addressText: String? {
         return userPinnedLocationAddress?.getAnnotationCalloutText()
     }
-    
-    
     
     // MARK: - Address Class Datasource
     
@@ -397,12 +379,7 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
         
         UIApplication.shared.statusBarStyle = .default
 //        self.detailedCallout = VPSAAnnotationCalloutView.init(frame: CGRect( )
-        
     }
-    
-    
-    
-//    private var mapViewVewController: VLViewController?
     
     private func addShadow(layer: CALayer) {
         layer.masksToBounds = false
@@ -410,14 +387,13 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
         layer.shadowOpacity = 0.7
         layer.shadowRadius = 3.4
         layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
-//        layer.shadowPath = UIBezierPath(rect: layer.bounds).cgPath
     }
-
     
     // MARK: - Navigation
     
     struct SegueIdentifiers {
         static let ResponseView = "ResponseViewPresentIdentifier"
+        static let Unwind = "unwindToCameraView"
         static let Exit = "exitToCamera"
     }
     
@@ -439,12 +415,24 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
             dataTableViewController?.convertedSelectedImages = convertedSelectedImages
             dataTableViewController?.tableViewScrollDelegate = self
             dataTableViewController?.allFieldsFilledDelegate = self
-        }
-        else if let controller = segue.destination as? ResponseViewController {
+        } else if let controller = segue.destination as? ResponseViewController {
             responseViewController = controller
             responseViewController?.delegate = self
+        } else if segue.identifier == SegueIdentifiers.Unwind {
+            responseViewController = nil
+            dataTableViewController?.embeddedViewController = nil
+            dataTableViewController?.userInfoViewController = nil
+            dataTableViewController?.imageCollectionViewController = nil
+            dataTableViewController = nil
         }
     }
+}
+
+struct SubmitViewConstants {
+    static let TableViewSnapThreshold = ScreenConstants.Height * 0.15
+    static let TableViewInitialOriginY = ScreenConstants.Height * 0.75
+    static let TableViewTopPosition = CGFloat(64.0)
+    static let AnnotationViewReuseIdentifier = "location"
 }
 
 extension SubmitViewController: SubmitViewAllFieldsFilledDelegate {
@@ -520,16 +508,21 @@ extension SubmitViewController: ResponseViewControllerDelegate {
                                          serialNumber: obtainedResults![ResponseDictKeys.SerialNumaber]!,
                                          carplateNumber: dataTableViewController!.carplateNumber!,
                                          state: Int16(0),
+                                         caseType: dataTableViewController!.userSelectedOption!.rawValue,
                                          capturedDate: dataTableViewController!.time!)
             NotificationCenter.default.post(name: NotificationConstants.NewData, object: caseFile)
-            performSegue(withIdentifier: SegueIdentifiers.Exit, sender: nil)
+            performSegue(withIdentifier: SegueIdentifiers.Unwind, sender: nil)
         case .FailedConnection:
+            // release
+            responseViewController = nil
             break
         case .Failed:
-            performSegue(withIdentifier: SegueIdentifiers.Exit, sender: nil)
+            // release
+            performSegue(withIdentifier: SegueIdentifiers.Unwind, sender: nil)
         default:
             break
         }
+        
     }
 }
 

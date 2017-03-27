@@ -9,31 +9,20 @@
 import Foundation
 import CoreLocation
 
-class GPSManager: NSObject, CLLocationManagerDelegate, AddressClassDatasource
+class GPSManager: NSObject, CLLocationManagerDelegate
 {
-    private var locationManager: CLLocationManager = CLLocationManager()
+    private var locationManager = CLLocationManager()
     private var signalStrengthThreshold: GPSSignalStrength
     var isGPSRunning: Bool = false
     var signalStrength: GPSSignalStrength? {
-        guard myLocation != nil else {
-            return nil
-        }
-        if myLocation!.horizontalAccuracy.binade > 200.0 {
-            return GPSSignalStrength.Low
-        }
-        else if myLocation!.horizontalAccuracy > 80.0 {
-            return GPSSignalStrength.Moderate
-        }
-        else {
-            return GPSSignalStrength.Strong
-        }
+        guard myLocation != nil else { return nil }
+        if myLocation!.horizontalAccuracy.binade > 200.0 { return GPSSignalStrength.Low }
+        else if myLocation!.horizontalAccuracy > 80.0 { return GPSSignalStrength.Moderate }
+        else { return GPSSignalStrength.Strong }
     }
-    weak var address: Address? {
-        didSet {
-            address?.dataSource = self
-//            locationManager.requestLocation()
-        }
-    }
+//    weak var address: Address? {
+//        didSet { address?.dataSource = self }
+//    }
     private var myLocation: CLLocation?
     
     var currentGPSLocation: CLLocation? {
@@ -41,9 +30,7 @@ class GPSManager: NSObject, CLLocationManagerDelegate, AddressClassDatasource
     }
     
     init(desiredSignalStrength: GPSSignalStrength) {
-        // init
         self.signalStrengthThreshold = desiredSignalStrength
-//        self.address = Address()
     }
     
     func startGPS() {
@@ -69,10 +56,7 @@ class GPSManager: NSObject, CLLocationManagerDelegate, AddressClassDatasource
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let latestLocation = locations[locations.count - 1]
-//        debugPrint(latestLocation)
-//        debugPrint(latestLocation.horizontalAccuracy)
         myLocation = latestLocation
-        debugPrint("GPS = \(myLocation)")
     }
 }
 

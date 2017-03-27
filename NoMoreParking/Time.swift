@@ -46,7 +46,9 @@ class Time {
             let array = timeStamp!.components(separatedBy: " ")
             // array[0] is date,  [1] is time
             retrievedDateString = array[0]
+            let newDateFormat = getFullDate()
             retrievedTimeString = array[1]
+            timeStamp = newDateFormat! + " " + retrievedTimeString!
 //            debugPrint("Captured date = \(retrievedDateString)")
 //            debugPrint("Captured time = \(retrievedTimeString)")
         }

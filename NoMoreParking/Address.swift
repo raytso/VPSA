@@ -51,10 +51,6 @@ class Address {
         return (placemark?.subThoroughfare == nil) ? nil : placemark!.subThoroughfare! + "號"
     }
     
-//    var streetName: String? {
-//        return (placemark?.name == nil) ? nil : placemark!.name!
-//    }
-    
     private var isRequesting: Bool = false
     
     private var placemark: CLPlacemark?
@@ -97,8 +93,7 @@ class Address {
     }
     
     func getShortAddress() -> String? {
-        guard (city != nil),
-            (districtName != nil) else { return nil }
+        guard (city != nil), (districtName != nil) else { return nil }
         
         let street = self.street ?? ""
         

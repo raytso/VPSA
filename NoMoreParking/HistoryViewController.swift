@@ -14,17 +14,11 @@ class HistoryViewController: UIViewController {
     
     @IBOutlet weak var navBar: UINavigationBar!
     
-//    @IBOutlet weak var shadowBuffer: UIImageView!
-    
-    @IBOutlet weak var historyDataTableContainer: UIView! {
-        didSet{
-//            historyDataTableContainer.translatesAutoresizingMaskIntoConstraints = true
-        }
-    }
-    
-//    private var model: HistoryViewModel?
+    @IBOutlet weak var historyDataTableContainer: UIView!
     
     private var dataTable: HistoryDataTableViewController?
+    
+    private weak var tab: AppMenuTabBarViewController?
     
     // MARK: - UDFs
     
@@ -34,27 +28,23 @@ class HistoryViewController: UIViewController {
         layer.shadowOpacity = 1.0
         layer.shadowRadius = 4.0
         layer.shadowOffset = CGSize(width: 0.0, height: 6.0)
-        // shadowPath causes shadow width problem on 7, layer width?
-//        layer.shadowPath = UIBezierPath(rect: layer.bounds).cgPath
         layer.zPosition = 2.0
     }
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let tab = self.tabBarController as! AppMenuTabBarViewController
-        dataTable?.model = tab.database
         // Do any additional setup after loading the view.
-//        let image = #imageLiteral(resourceName: "buffer").
-//        let imv = UIImageView(image: image)
-//        shadowBuffer.addSubview(imv)
-//        addShadow(layer: shadowBuffer.layer)
+        
+        // WARNING - Reference to PARENT
+        tab = self.tabBarController as? AppMenuTabBarViewController
+        dataTable?.model = tab?.database
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         UIApplication.shared.statusBarStyle = .default
+        
     }
 
     override func didReceiveMemoryWarning() {

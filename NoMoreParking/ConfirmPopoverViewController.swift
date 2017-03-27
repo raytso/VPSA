@@ -10,47 +10,47 @@ import UIKit
 
 protocol CapturedImageDataSource: class {
     func getCapturedImageDataSets(sender: ConfirmPopoverViewController) -> [Data]?
+    func releaseCapturedImages()
 }
 
 protocol ConfirmPopoverViewControllerDelegate: class {
-    func userFinishedSelecting(selectedFiles: [UploadFile], selectedFilesInUIImage: [UIImage])
+    func userFinishedSelecting()
 }
 
 class ConfirmPopoverViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     // MARK: - Properties
-    // MARK: Public
+
     var filesToUpload: [UploadFile]? = []
-    weak var delegate: ConfirmPopoverViewControllerDelegate?
-    var cameraFeed: CameraFeed? {
-        didSet {
-            debugPrint("cameraFeed transfer complete")
-        }
+    
+    var cameraFeed: CameraFeed?
+    
+    var imageCellCenterInset: CGFloat {
+        return (imageCollectionView.bounds.width - 300.0) / 2
     }
     
-    // MARK: Private
+    weak var delegate: ConfirmPopoverViewControllerDelegate?
+    
     private var selectedUIImageSets: [UIImage] = []
+    
     private var capturedImageDataSets: [Data]? {
         didSet {
-            guard capturedImageDataSets != nil else {
-                fatalError("CapturedImageData is nil")
-            }
+            guard capturedImageDataSets != nil else { return }
             for imageData in capturedImageDataSets! {
                 capturedImageUIImageSets!.append(UIImage(data: imageData)!)
             }
         }
     }
+    
     private var capturedImageUIImageSets: [UIImage]? = [] {
         didSet {
             guard !capturedImageDataSets!.isEmpty else { return }
             userSelectedIndecies = Array(repeating: true, count: capturedImageDataSets!.count)
         }
     }
-    private var userSelectedIndecies: [Bool]?
-    var imageCellCenterInset: CGFloat {
-        return (imageCollectionView.bounds.width - 300.0) / 2
-    }
     
-    // MARK: Outlets
+    private var userSelectedIndecies: [Bool]?
+    
+    // MARK: - Outlets
     
     @IBOutlet weak var returnButton: UIButton!
     
@@ -64,10 +64,7 @@ class ConfirmPopoverViewController: UIViewController, UICollectionViewDataSource
     // MARK: Actions
     
     @IBAction func returnToCamera(_ sender: Any) {
-        if checkShouldPerformSegue() {
-            performSegue(withIdentifier: SegueIdentifiers.BackToCamera, sender: nil)
-            self.dismiss(animated: true, completion: nil)
-        }
+        performSegue(withIdentifier: SegueIdentifiers.BackToCamera, sender: nil)
     }
     
     // MARK: - CollectionView DataSource
@@ -76,9 +73,11 @@ class ConfirmPopoverViewController: UIViewController, UICollectionViewDataSource
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ConfirmPictureImageSelectionCollecterViewCell
         cell.image = capturedImageUIImageSets?[indexPath.item]
         if (userSelectedIndecies![indexPath.item]) {
-            cell.imageSelectedMask.isHidden = false
-        } else {
+            cell.checkMask.isHidden = false
             cell.imageSelectedMask.isHidden = true
+        } else {
+            cell.checkMask.isHidden = true
+            cell.imageSelectedMask.isHidden = false
         }
         return cell
     }
@@ -91,25 +90,24 @@ class ConfirmPopoverViewController: UIViewController, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! ConfirmPictureImageSelectionCollecterViewCell
         if (userSelectedIndecies![indexPath.item]) {
-            cell.imageSelectedMask.setViewIsToHide(hidden: true)
+            cell.checkMask.setViewIsToHide(hidden: true)
+            cell.imageSelectedMask.setViewIsToHide(hidden: false)
             userSelectedIndecies![indexPath.item] = false
         } else {
-            cell.imageSelectedMask.setViewIsToHide(hidden: false)
+            cell.checkMask.setViewIsToHide(hidden: false)
+            cell.imageSelectedMask.setViewIsToHide(hidden: true)
             userSelectedIndecies![indexPath.item] = true
         }
     }
     
-    // MARK: - UDF
+    // MARK: - UDFs
     private func updateUI() {
-        debugPrint("updating UI")
         self.imageCollectionView.reloadData()
     }
     
     private func creatingFilesToUpload() {
         for state in userSelectedIndecies!.enumerated() {
-            guard state.element else {
-                continue
-            }
+            guard state.element else { continue }
             var file = UploadFile()
             file.content = capturedImageDataSets![state.offset]
             file.fileName = "image\(state.offset).jpg"
@@ -130,9 +128,7 @@ class ConfirmPopoverViewController: UIViewController, UICollectionViewDataSource
     
     private func userDidNotSelectAny() -> Bool {
         for selectState in userSelectedIndecies! {
-            guard !selectState else {
-                return false
-            }
+            guard !selectState else { return false }
         }
         return true
     }
@@ -141,7 +137,7 @@ class ConfirmPopoverViewController: UIViewController, UICollectionViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        capturedImageDataSets = cameraFeed?.getCapturedImageDataSets(sender: self) ?? nil
+        capturedImageDataSets = cameraFeed?.getCapturedImageDataSets(sender: self)
         imageCollectionView.contentInset = UIEdgeInsetsMake(-20.0, 0.0, 0.0, 0.0)
         self.automaticallyAdjustsScrollViewInsets = false
         self.imageCollectionView.decelerationRate = UIScrollViewDecelerationRateFast
@@ -165,10 +161,6 @@ class ConfirmPopoverViewController: UIViewController, UICollectionViewDataSource
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.backgroundColor = UIColor.clear
-        navigationController?.navigationBar.isTranslucent = true
         self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
         filesToUpload = []
     }
@@ -183,14 +175,13 @@ class ConfirmPopoverViewController: UIViewController, UICollectionViewDataSource
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if segue.identifier == SegueIdentifiers.BackToCamera {
-            delegate?.userFinishedSelecting(selectedFiles: filesToUpload!, selectedFilesInUIImage: selectedUIImageSets)
-            self.dismiss(animated: true, completion: nil)
-        }
-        else if segue.identifier == SegueIdentifiers.SubmitView {
+        
+        if segue.identifier == SegueIdentifiers.SubmitView {
             if let controller = segue.destination as? SubmitViewController {
                 controller.filesToUpload = filesToUpload
                 controller.convertedSelectedImages = selectedUIImageSets
+                cameraFeed?.releaseCapturedImages()
+                delegate?.userFinishedSelecting()
             }
         }
     }

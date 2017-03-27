@@ -30,11 +30,11 @@ class HistoryViewModel {
         newData.caseID = file.caseID
         newData.serialNumber = file.serialNumber
         newData.state = file.state
-        
-        let timeText = file.capturedDate.timeStamp
+        newData.caseType = file.caseType
+        let timeText = file.capturedDate.timeStamp! + " +0800"
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
-        let newDate = formatter.date(from: timeText!)
+        let newDate = formatter.date(from: timeText)
         newData.capturedDate = newDate as NSDate!
         
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
@@ -53,10 +53,6 @@ class HistoryViewModel {
             debugPrint(error)
             return nil
         }
-    }
-    
-    private func saveToCoreData(file: HistoryDataStructure) {
-        
     }
 }
 

@@ -97,15 +97,15 @@ class SubmitViewDataTableViewController: UITableViewController, UITextFieldDeleg
         }
     }
     
-    @IBOutlet weak var otherDateTableViewCell: OthersTemplateTableViewCell!
+    @IBOutlet weak var otherDateTableViewCell: UITableViewCell!
     @IBOutlet weak var otherDateLabel: UILabel!
     @IBOutlet weak var otherDateIcon: UIImageView!
     
-    @IBOutlet weak var otherTimeTableViewCell: OthersTemplateTableViewCell!
+    @IBOutlet weak var otherTimeTableViewCell: UITableViewCell!
     @IBOutlet weak var otherTimeLabel: UILabel!
     @IBOutlet weak var otherTimeIcon: UIImageView!
     
-    @IBOutlet weak var otherLocationTableViewCell: OthersTemplateTableViewCell! {
+    @IBOutlet weak var otherLocationTableViewCell: UITableViewCell! {
         didSet { addShadow(layer: otherLocationTableViewCell.layer, height: .Bottom, isTitle: false) }
     }
     @IBOutlet weak var otherLocationLabel: UILabel! {
@@ -125,9 +125,10 @@ class SubmitViewDataTableViewController: UITableViewController, UITextFieldDeleg
     //  - Private
     weak var violationDataSource: ViolationTitleDataSource?
     
-    private var embeddedViewController: ViolationTitleOptionsTableViewController?
-    private var userInfoViewController: UserInfoInputTableViewController?
-    private var imageCollectionViewController: SelectedImagesCollectionViewController?
+    var embeddedViewController: ViolationTitleOptionsTableViewController?
+    var userInfoViewController: UserInfoInputTableViewController?
+    var imageCollectionViewController: SelectedImagesCollectionViewController?
+    
     var carplateNumber: String? {
         if (carplateNumberFront?.isEmpty ?? true || carplateNumberBack?.isEmpty ?? true) {
             return nil
@@ -170,9 +171,14 @@ class SubmitViewDataTableViewController: UITableViewController, UITextFieldDeleg
     }
     
     private var returnKeyAlreadySavedText = false
+    
     private var shouldEndEditing = false
     
-    var userSelectedOption: ViolationOptions.Options?
+    var userSelectedOption: ViolationOptions.Options? {
+        didSet {
+            violationTableViewCellLabel.text = userSelectedOption?.rawValue
+        }
+    }
     
     weak var tableViewScrollDelegate: SubmitViewTableViewScrollDelegate?
     
@@ -312,13 +318,8 @@ class SubmitViewDataTableViewController: UITableViewController, UITextFieldDeleg
         layer.shadowOpacity = 0.5
         layer.shadowRadius = 2.4
         layer.shadowOffset = CGSize(width: 0.0, height: height.rawValue)
-        // shadowPath causes shadow width problem on 7, layer width?
         layer.shadowPath = UIBezierPath(rect: layer.bounds).cgPath
-        if isTitle {
-            layer.zPosition = 1.0
-        } else {
-            layer.zPosition = 2.0
-        }
+        layer.zPosition = isTitle ? 1.0 : 2.0
     }
     
     private func removeShadow(layer: CALayer) {
@@ -347,7 +348,8 @@ class SubmitViewDataTableViewController: UITableViewController, UITextFieldDeleg
         
         tableView.beginUpdates()
         tableView.endUpdates()
-        UIView.animate(withDuration: 0.1, animations: { forView.alpha = desired.rawValue }) { _ in
+        UIView.animate(withDuration: 0.1,
+                       animations: { forView.alpha = desired.rawValue }) { _ in
             forView.isHidden = (desired == .Visible) ? false : true
         }
     }
@@ -362,7 +364,7 @@ class SubmitViewDataTableViewController: UITableViewController, UITextFieldDeleg
     
     
     struct Constants {
-        static let ScrollViewInsetYValue = CGFloat(8.0 + SubmitViewController.Constants.TableViewTopPosition)
+        static let ScrollViewInsetYValue = CGFloat(8.0 + SubmitViewConstants.TableViewTopPosition)
         struct DefaultCarplateText {
             static let Front = "AAA"
             static let Back = "0000"
@@ -380,7 +382,8 @@ class SubmitViewDataTableViewController: UITableViewController, UITextFieldDeleg
         view.addGestureRecognizer(tap)
         
         // Data initialization
-        violationTableViewCellLabel.text = ViolationOptions.Options.TempParking.rawValue
+        userSelectedOption = ViolationOptions.Options.TempParking
+        
         time = Time(data: filesToUpload?.first?.content)
         
         
@@ -541,20 +544,13 @@ class SubmitViewDataTableViewController: UITableViewController, UITextFieldDeleg
     }
 }
 
-private extension UITextField {
-    
-}
-
-
 extension SubmitViewDataTableViewController: ViolationTitleDelegation {
     func userDidSelectOption(sender: ViolationOptions.Options) {
         violationTableViewCellLabel.text = sender.rawValue
         userSelectedOption = sender
-        
         if !violationOptionsContainerView.isHidden {
             violationOptionsContainerViewVisible = false
             updateContainerViewVisibility(desired: .Hidden, forView: violationOptionsContainerView)
         }
-//        updateContainerViewVisibility(desired: .Hidden , forView: violationOptionsContainerView)
     }
 }

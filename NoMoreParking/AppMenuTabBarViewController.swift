@@ -29,7 +29,6 @@ class AppMenuTabBarViewController: UITabBarController {
             }
         }
         setupTabBar()
-        
     }
     
     private func setupTabBar() {
@@ -60,11 +59,3 @@ class AppMenuTabBarViewController: UITabBarController {
     }
 
 }
-
-
-//
-//extension AppMenuTabBarViewController: SubmitViewControllerDelegate {
-//    func userDidRecieveSuccessfulData(data: CaseStructure!) {
-//        database.addSingleData(file: data)
-//    }
-//}

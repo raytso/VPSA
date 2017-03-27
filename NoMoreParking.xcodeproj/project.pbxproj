@@ -22,6 +22,8 @@
 		712287E21E7FB6EB0086ACBA /* ResponseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712287E11E7FB6EB0086ACBA /* ResponseView.swift */; };
 		712287E41E7FE5170086ACBA /* ResponseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712287E31E7FE5170086ACBA /* ResponseViewController.swift */; };
 		712287E61E7FE57C0086ACBA /* ResponseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712287E51E7FE57C0086ACBA /* ResponseViewModel.swift */; };
+		71437FDB1E87849900168DF3 /* CheckMask.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71437FDA1E87849900168DF3 /* CheckMask.xib */; };
+		71437FDF1E87860000168DF3 /* CheckIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71437FDE1E87860000168DF3 /* CheckIconView.swift */; };
 		7143C1D71E488FA5002F4B35 /* GPS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7143C1D61E488FA5002F4B35 /* GPS.swift */; };
 		71446A1A1E6CB2580062FBEC /* OthersTemplateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71446A191E6CB2580062FBEC /* OthersTemplateTableViewCell.swift */; };
 		7144EEBF1E7D91B10020189F /* CityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7144EEBE1E7D91B10020189F /* CityData.swift */; };
@@ -103,6 +105,8 @@
 		712287E11E7FB6EB0086ACBA /* ResponseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseView.swift; sourceTree = "<group>"; };
 		712287E31E7FE5170086ACBA /* ResponseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseViewController.swift; sourceTree = "<group>"; };
 		712287E51E7FE57C0086ACBA /* ResponseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseViewModel.swift; sourceTree = "<group>"; };
+		71437FDA1E87849900168DF3 /* CheckMask.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckMask.xib; sourceTree = "<group>"; };
+		71437FDE1E87860000168DF3 /* CheckIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckIconView.swift; sourceTree = "<group>"; };
 		7143C1D61E488FA5002F4B35 /* GPS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPS.swift; sourceTree = "<group>"; };
 		71446A191E6CB2580062FBEC /* OthersTemplateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OthersTemplateTableViewCell.swift; sourceTree = "<group>"; };
 		7144EEBE1E7D91B10020189F /* CityData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityData.swift; sourceTree = "<group>"; };
@@ -226,6 +230,7 @@
 		715BE6601D82ECA200C0E928 /* NoMoreParking */ = {
 			isa = PBXGroup;
 			children = (
+				71437FDE1E87860000168DF3 /* CheckIconView.swift */,
 				7183C9761E85784B00DED820 /* HistoryViewController.swift */,
 				71FAB31A1E84F83F00A1AC0E /* AppMenuTabBarViewController.swift */,
 				71AB7B191E83AF1C00733E20 /* HistoryDataTableViewController.swift */,
@@ -259,6 +264,7 @@
 				71457A8C1E6978FC008093A2 /* CustomFlowLayout.swift */,
 				71480CFF1E5EF73A00D717A2 /* ConfirmPictureImageSelectionCollectionViewCell.swift */,
 				71FE79C51E66C29F00AFE422 /* SelectedMaskView.swift */,
+				71437FDA1E87849900168DF3 /* CheckMask.xib */,
 				71DA7AC71E78E94A00A7E874 /* VPSAAnnotationCallout.swift */,
 				71DA7AC91E78EA4100A7E874 /* VPSAAnnotationCalloutView.xib */,
 				71FE79C71E66C45F00AFE422 /* SelectedMaskView.xib */,
@@ -392,7 +398,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Ray Tso";
 				TargetAttributes = {
 					715BE65D1D82ECA100C0E928 = {
@@ -444,6 +450,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71437FDB1E87849900168DF3 /* CheckMask.xib in Resources */,
 				715BE66F1D82ECA200C0E928 /* LaunchScreen.storyboard in Resources */,
 				71FE79C81E66C45F00AFE422 /* SelectedMaskView.xib in Resources */,
 				715BE66C1D82ECA200C0E928 /* Assets.xcassets in Resources */,
@@ -613,6 +620,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71437FDF1E87860000168DF3 /* CheckIconView.swift in Sources */,
 				715F58271D90A8DC00FFFA53 /* LicensePlateAnalyzer.swift in Sources */,
 				71446A1A1E6CB2580062FBEC /* OthersTemplateTableViewCell.swift in Sources */,
 				712287E61E7FE57C0086ACBA /* ResponseViewModel.swift in Sources */,
@@ -732,6 +740,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -782,6 +791,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

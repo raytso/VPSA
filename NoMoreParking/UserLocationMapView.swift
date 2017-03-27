@@ -52,17 +52,12 @@ class UserLocationMapView: MKMapView, UIGestureRecognizerDelegate {
     
     func addPin(annotation: MKAnnotation, animated: Bool) {
         self.addAnnotation(annotation)
-        self.showAnnotations([annotation], animated: animated)
+//        self.showAnnotations([annotation], animated: animated)
     }
     
     func removePin(annotation: MKAnnotation?, animation: Bool) {
-        guard annotation != nil else {
-            return
-        }
-        
-        if annotation is MKUserLocation {
-            return
-        }
+        guard annotation != nil else { return }
+        if annotation is MKUserLocation { return }
         
         removeAnnotation(annotation!)
     }
@@ -90,8 +85,6 @@ class UserLocationMapView: MKMapView, UIGestureRecognizerDelegate {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        gestureLongPress = UILongPressGestureRecognizer.init(target: self, action: #selector(self.addPinByGesture(gesture:)))
-//        gestureLongPress?.minimumPressDuration = 2.0
     }
     
     required init?(coder aDecoder: NSCoder) {

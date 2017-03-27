@@ -13,6 +13,7 @@ struct CaseStructure {
     var serialNumber: String
     var carplateNumber: String
     var state: Int16
+    var caseType: String
     var capturedDate: Time
 }
 
@@ -60,20 +61,27 @@ class HistoryDataTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if let array = historyDatas {
-            if array.count == 0 {
-                let noDataLabel: UILabel = UILabel(frame: CGRect(x: 0,
-                                                                 y: 0,
-                                                                 width: tableView.bounds.size.width,
-                                                                 height: tableView.bounds.size.height))
-                noDataLabel.text = "No data available"
-                noDataLabel.textColor = UIColor.black
-                noDataLabel.textAlignment = .center
-                tableView.backgroundView = noDataLabel
-                tableView.separatorStyle = .none
+        if section == 0 {
+            if let array = historyDatas {
+                if array.count == 0 {
+                    let noDataLabel: UILabel = UILabel(frame: CGRect(x: 0,
+                                                                     y: 0,
+                                                                     width: tableView.bounds.size.width,
+                                                                     height: tableView.bounds.size.height))
+                    noDataLabel.text = "目前沒有資料"
+                    noDataLabel.textColor = UIColor.darkGray
+                    noDataLabel.textAlignment = .center
+                    tableView.backgroundView = noDataLabel
+                    tableView.separatorStyle = .none
+                } else {
+                    tableView.backgroundView = UIView()
+                    tableView.separatorStyle = .singleLine
+                }
             }
+            return historyDatas?.count ?? 0
+        } else {
+            return 0
         }
-        return historyDatas?.count ?? 0
     }
 
     
@@ -84,6 +92,8 @@ class HistoryDataTableViewController: UITableViewController {
             cell.caseID.text = data.caseID
             cell.serialNumber.text = data.serialNumber
             cell.caseStatusType = CaseStatus(rawValue: Int(data.state))!
+            cell.caseType.text = data.caseType
+            debugPrint(data)
         }
         // Configure the cell...
         return cell

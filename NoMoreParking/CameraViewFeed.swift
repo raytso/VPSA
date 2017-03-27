@@ -15,17 +15,25 @@ protocol CameraFeedDelegate: class {
 
 
 class CameraFeed: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapturePhotoCaptureDelegate, CapturedImageDataSource {
-//    private var cameraDataOutput: AVCaptureVideoDataOutput?
+    
     private var captureDeviceOutputQueue: DispatchQueue?
+    
     private var devicesToSearch: [AVCaptureDeviceType]! = [.builtInWideAngleCamera,
                                                            .builtInDuoCamera]
     private var captureSession: AVCaptureSession?
+    
     private var frameImage: CGImage?
-    public  var previewLayer: AVCaptureVideoPreviewLayer!
+    
+    var previewLayer: AVCaptureVideoPreviewLayer!
+    
     private var capturePhotoOutput: AVCapturePhotoOutput?
+    
     private var capturePhotoSettings: AVCapturePhotoSettings!
+    
     private var captureDeviceVideoOutput: AVCaptureVideoDataOutput!
+    
     private var capturedImageDataSets: [Data]? = []
+    
     weak var delegate: CameraFeedDelegate?
     
     // MARK: - Protocols
@@ -34,7 +42,10 @@ class CameraFeed: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapt
         return capturedImageDataSets
     }
     
-//    private var capturePhotoDelegation: AVCapturePhotoCaptureDelegate?
+    func releaseCapturedImages() {
+        self.capturedImageDataSets = []
+    }
+    
     // MARK: - Camera Setup
     
     enum DevicePosition {
@@ -79,6 +90,7 @@ class CameraFeed: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapt
             catch {
                 // Cannot add input device
                 // Throws error
+                return
             }
             if captureSession!.canAddInput(captureDeviceInput) {
                 captureSession!.addInput(captureDeviceInput)
@@ -107,19 +119,20 @@ class CameraFeed: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapt
                     captureSession!.addOutput(captureDeviceVideoOutput)
                 } else {
                     debugPrint("Cannot add video output")
+                    return
                 }
                 if captureSession!.canAddOutput(capturePhotoOutput) {
                     captureSession!.addOutput(capturePhotoOutput)
                 }
                 else {
                     debugPrint("Cannot add photo output")
-
+                    return
                 }
                 previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
                 previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
-                debugPrint("Camera finished setup")
             } else {
-                print("Cannot setup camera")
+                debugPrint("Cannot setup camera")
+                return
             }
         }
     }
@@ -130,13 +143,11 @@ class CameraFeed: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapt
     }
     
     func startCamera() {
-        debugPrint("Camera starting")
         self.captureSession?.startRunning()
     }
     
     func stopCamera() {
         self.captureSession?.stopRunning()
-        debugPrint("Camera stopped")
     }
     
 //    func captureImage(completion:(_ result: String) -> Void) {
@@ -149,7 +160,6 @@ class CameraFeed: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapt
             let settings = AVCapturePhotoSettings.init(format: [AVVideoCodecKey: AVVideoCodecJPEG])
             self.capturePhotoOutput?.capturePhoto(with: settings, delegate: self)
         }
-//        setupPhotoSettings()
     }
     
     func capture(_ captureOutput: AVCapturePhotoOutput,
@@ -164,15 +174,15 @@ class CameraFeed: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapt
         }
         let sampleBuffer = photoSampleBuffer
         let previewBuffer = previewPhotoSampleBuffer
-        let imageData = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: sampleBuffer!,previewPhotoSampleBuffer: previewBuffer)
+        let imageData = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: sampleBuffer!,
+                                                                         previewPhotoSampleBuffer: previewBuffer)
         capturedImageDataSets?.append(imageData!)
-        debugPrint(capturedImageDataSets?.count ?? 0)
         delegate?.finishedRenderingCapture()
     }
     
-    func captureVideo() {
-        
-    }
+//    func captureVideo() {
+//        
+//    }
     
     private func setPreviewLayerFrame(frame: CGRect) {
         previewLayer?.frame = frame

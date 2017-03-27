@@ -11,7 +11,6 @@ import UIKit
 class ConfirmPictureImageSelectionCollecterViewCell: UICollectionViewCell {
     
     // MARK: - Variables
-//    var imageMaskView: SelectedMaskView?
     var image: UIImage! {
         didSet {
             updateUI()
@@ -21,6 +20,7 @@ class ConfirmPictureImageSelectionCollecterViewCell: UICollectionViewCell {
     // MARK: - Outlets
     @IBOutlet weak var capturedImageShots: UIImageView!
     @IBOutlet weak var imageSelectedMask: SelectedMaskView!
+    @IBOutlet weak var checkMask: CheckIconView!
     
     // MARK: - UDFs
     private func updateUI() {
@@ -29,19 +29,13 @@ class ConfirmPictureImageSelectionCollecterViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-//        backgroundView?.layer.cornerRadius = 12.0
-//        backgroundView?.layer.masksToBounds = true
-//        backgroundView?.layer.borderColor = UIColor.darkGray.cgColor
-//        backgroundView?.layer.borderWidth = 1.0
         self.layer.masksToBounds = false
-//        self.layer.cornerRadius = 10.0
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowOpacity = 0.7
         self.layer.shadowRadius = 4.0
         self.layer.shadowOffset = CGSize(width: 0.0, height: 8.0)
         self.layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
-//        let path = UIBezierPath(roundedRect: self.bounds, cornerRadius: 12.0).cgPath
-//        self.layer.shadowPath = path
+
         
     }
 }

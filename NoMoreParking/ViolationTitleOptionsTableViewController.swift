@@ -30,7 +30,6 @@ class ViolationTitleOptionsTableViewController: UITableViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        // save selected state
         previousSelectedIndexPath = tableView.indexPathForSelectedRow
     }
     
@@ -38,7 +37,9 @@ class ViolationTitleOptionsTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         // check for initial selected state
         guard previousSelectedIndexPath != nil else { return }
-        tableView.selectRow(at: previousSelectedIndexPath, animated: true, scrollPosition: .none)
+        tableView.selectRow(at: previousSelectedIndexPath,
+                            animated: true,
+                            scrollPosition: .none)
     }
     
     // MARK: - Table view delegation
@@ -48,17 +49,12 @@ class ViolationTitleOptionsTableViewController: UITableViewController {
         cell?.accessoryType = UITableViewCellAccessoryType.checkmark
         
         switch indexPath.row {
-        case 0:
-            optionsData.selectOption(option: .TempParking)
-        case 1:
-            optionsData.selectOption(option: .NoParking)
-        case 2:
-            optionsData.selectOption(option: .BlockingWaitingBlock)
-        case 3:
-            optionsData.selectOption(option: .OverStopLine)
+        case 0: optionsData.selectOption(option: .TempParking)
+        case 1: optionsData.selectOption(option: .NoParking)
+        case 2: optionsData.selectOption(option: .BlockingWaitingBlock)
+        case 3: optionsData.selectOption(option: .OverStopLine)
         default: break
         }
-        
         didSelectDelegate?.userDidSelectOption(sender: optionsData.getCurrentSelectedOption())
     }
     
