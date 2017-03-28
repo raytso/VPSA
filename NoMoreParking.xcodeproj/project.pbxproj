@@ -22,6 +22,7 @@
 		712287E21E7FB6EB0086ACBA /* ResponseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712287E11E7FB6EB0086ACBA /* ResponseView.swift */; };
 		712287E41E7FE5170086ACBA /* ResponseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712287E31E7FE5170086ACBA /* ResponseViewController.swift */; };
 		712287E61E7FE57C0086ACBA /* ResponseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712287E51E7FE57C0086ACBA /* ResponseViewModel.swift */; };
+		7134416B1E893A820024CF31 /* AgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7134416A1E893A820024CF31 /* AgreementViewController.swift */; };
 		71437FDB1E87849900168DF3 /* CheckMask.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71437FDA1E87849900168DF3 /* CheckMask.xib */; };
 		71437FDF1E87860000168DF3 /* CheckIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71437FDE1E87860000168DF3 /* CheckIconView.swift */; };
 		7143C1D71E488FA5002F4B35 /* GPS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7143C1D61E488FA5002F4B35 /* GPS.swift */; };
@@ -105,6 +106,7 @@
 		712287E11E7FB6EB0086ACBA /* ResponseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseView.swift; sourceTree = "<group>"; };
 		712287E31E7FE5170086ACBA /* ResponseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseViewController.swift; sourceTree = "<group>"; };
 		712287E51E7FE57C0086ACBA /* ResponseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseViewModel.swift; sourceTree = "<group>"; };
+		7134416A1E893A820024CF31 /* AgreementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgreementViewController.swift; sourceTree = "<group>"; };
 		71437FDA1E87849900168DF3 /* CheckMask.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckMask.xib; sourceTree = "<group>"; };
 		71437FDE1E87860000168DF3 /* CheckIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckIconView.swift; sourceTree = "<group>"; };
 		7143C1D61E488FA5002F4B35 /* GPS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPS.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 				7144EEBE1E7D91B10020189F /* CityData.swift */,
 				715BE6611D82ECA200C0E928 /* AppDelegate.swift */,
 				715BE6651D82ECA200C0E928 /* Main.storyboard */,
+				7134416A1E893A820024CF31 /* AgreementViewController.swift */,
 				715F582A1D91D6F600FFFA53 /* AppMenuViewController.swift */,
 				715F58281D91455000FFFA53 /* ConfirmPopoverViewController.swift */,
 				71457A8C1E6978FC008093A2 /* CustomFlowLayout.swift */,
@@ -642,6 +645,7 @@
 				711E72681E71E5160098977D /* UserInfoClass.swift in Sources */,
 				7183C9771E85784B00DED820 /* HistoryViewController.swift in Sources */,
 				71E8629F1E6F1A3C00698B36 /* ViolationTitleOptionsTableViewCell.swift in Sources */,
+				7134416B1E893A820024CF31 /* AgreementViewController.swift in Sources */,
 				71FE79C61E66C29F00AFE422 /* SelectedMaskView.swift in Sources */,
 				715F582B1D91D6F600FFFA53 /* AppMenuViewController.swift in Sources */,
 				711E72601E700EB70098977D /* ViolationOptions.swift in Sources */,

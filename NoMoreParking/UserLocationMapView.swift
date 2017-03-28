@@ -90,7 +90,7 @@ class UserLocationMapView: MKMapView, UIGestureRecognizerDelegate {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         gestureLongPress = UILongPressGestureRecognizer.init(target: self, action: #selector(self.addPinByGesture(gesture:)))
-        gestureLongPress?.minimumPressDuration = 0.4
+        gestureLongPress?.minimumPressDuration = 0.25
         self.addGestureRecognizer(gestureLongPress!)
     }
     

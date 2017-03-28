@@ -52,6 +52,8 @@ class ConfirmPopoverViewController: UIViewController, UICollectionViewDataSource
     
     // MARK: - Outlets
     
+    @IBOutlet weak var navBar: UINavigationBar!
+    
     @IBOutlet weak var returnButton: UIButton!
     
     @IBOutlet weak var imageCollectionView: UICollectionView! {
@@ -146,7 +148,7 @@ class ConfirmPopoverViewController: UIViewController, UICollectionViewDataSource
         if !UIAccessibilityIsReduceTransparencyEnabled() {
             self.view.backgroundColor = UIColor.clear
             
-            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.regular)
+            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
             let blurEffectView = UIVisualEffectView(effect: blurEffect)
             //Fill view
             blurEffectView.frame = self.view.bounds
@@ -156,6 +158,15 @@ class ConfirmPopoverViewController: UIViewController, UICollectionViewDataSource
         } else {
             self.view.backgroundColor = UIColor.black
         }
+        
+        // Navigation bar
+        navBar.setBackgroundImage(UIImage(), for: .default)
+        navBar.shadowImage = UIImage()
+        navBar.isTranslucent = true
+        navBar.backgroundColor = UIColor.clear
+//        self.navigationController?.view.backgroundColor = UIColor.clear
+        
+        
         updateUI()
     }
     

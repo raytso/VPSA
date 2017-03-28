@@ -18,6 +18,12 @@ protocol AddressClassDelegate: class {
 }
 
 class Address {
+    
+//    var systemLanguage: UserDefaults?
+//    var chineseLanguage: UserDefaults = {
+//       let def = UserDefaults.object(.languageCode)
+//    }()
+    
     private let taipeiCityDistrictDictionary: [String : String] = [ "100" : "中正區",
                                                                     "103" : "大同區",
                                                                     "104" : "中山區",
@@ -108,12 +114,12 @@ class Address {
     
     private func reverseGeoLocation(latestLocation: CLLocation?) {
         guard !isRequesting else { return }
+        
         CLGeocoder().reverseGeocodeLocation(latestLocation!, completionHandler: { (placemarks, error) -> Void in
             if error != nil {
                 debugPrint(error!)
                 return
             }
-            
             if (placemarks?.count)! > 0 {
                 self.placemark = placemarks![0]
                 self.delegate?.geocodeRecieved(succeeded: true)

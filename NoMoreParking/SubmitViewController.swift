@@ -116,6 +116,8 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
     
     var isTableViewScrolledToTop: Bool = true
     
+    private let systemTriggeredPan = UIPanGestureRecognizer()
+    
     private var discardDataAlert: UIAlertController = {
         let alert = UIAlertController.init(title: "確定要退出？", message: "\n您會失去已經拍攝的影像及輸入的資料", preferredStyle: .alert)
         return alert
@@ -323,6 +325,8 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
     }
     
     func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
+        let blueDot = mapView.view(for: mapView.userLocation)
+        blueDot?.isEnabled = false
         guard self.userPinnedLocation != nil else { return }
         self.mapView.prepareToShowAnnotationView(annotation: self.mapView.userPinnedAnnotation!)
     }
@@ -449,6 +453,11 @@ extension SubmitViewController: SubmitViewAllFieldsFilledDelegate {
 }
 
 extension SubmitViewController: SubmitViewTableViewScrollDelegate {
+    func scrollToMapView() {
+        isTableViewScrolledToTop = true
+        debugPrint("scrolled to top, now find a way to pan down")
+    }
+
     func tableViewScrolledToTop(sender: SubmitViewDataTableViewController) {
         isTableViewScrolledToTop = true
     }

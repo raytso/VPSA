@@ -18,6 +18,7 @@ protocol SubmitViewAllFieldsFilledDelegate: class {
 
 protocol SubmitViewTableViewScrollDelegate: class {
     func tableViewScrolledToTop(sender: SubmitViewDataTableViewController)
+    func scrollToMapView()
 }
 
 class SubmitViewDataTableViewController: UITableViewController, UITextFieldDelegate {
@@ -362,6 +363,10 @@ class SubmitViewDataTableViewController: UITableViewController, UITextFieldDeleg
         dismissKeyboard()
     }
     
+    func scrollToTop() {
+        let desiredOffset = CGPoint(x: 0, y: -self.tableView.contentInset.top)
+        self.tableView.setContentOffset(desiredOffset, animated: true)
+    }
     
     struct Constants {
         static let ScrollViewInsetYValue = CGFloat(8.0 + SubmitViewConstants.TableViewTopPosition)
@@ -426,6 +431,9 @@ class SubmitViewDataTableViewController: UITableViewController, UITextFieldDeleg
                 targetView = violationOptionsContainerView
             case otherUserTableViewCell:
                 targetView = userInfoContainerView
+            case otherLocationTableViewCell:
+                scrollToTop()
+                tableViewScrollDelegate?.scrollToMapView()
             default: break
             }
             guard targetView != nil else {

@@ -22,10 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         UIApplication.shared.statusBarStyle = .lightContent
-        
-        debugPrint("Starting gps")
-        AppDelegate.gpsInstance!.startGPS()
-        debugPrint("gps running")
+        AppDelegate.gpsInstance?.startGPS()
         return true
     }
 

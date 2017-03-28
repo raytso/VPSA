@@ -17,6 +17,14 @@ protocol FRSAlamofireDelegate: class {
 class FormRequestSessionWithAlamofire {
 
     let parameterNames = ViolationForm.FormConstants.FormParametersNames.AllParameters
+    let customHeaders = ["Origin" : "https://www.tcpd.gov.tw",
+                         "Accept-Encoding" : "gzip, deflate, br",
+                         "Accept-Language" : "en-US,en;q=0.8,zh-TW;q=0.6,zh;q=0.4,ja;q=0.2,zh-CN;q=0.2",
+                         "Upgrade-Insecure-Requests" : "1",
+                         "User-Agent" : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.75 Safari/537.36",
+                         "Accept" : "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                         "Cache-Control" : "max-age=0",
+                         "Referer" : "https://www.tcpd.gov.tw/tcpd/cht/index.php?act=traffic&code=add"]
     weak var delegate: FRSAlamofireDelegate?
     var formStruct: ViolationForm?
     var files: [UploadFile]?
@@ -69,7 +77,7 @@ class FormRequestSessionWithAlamofire {
             }
             
             formData.append(self.formStruct!.getValueString(name: .ConfirmSubmit)!.data(using: .utf8, allowLossyConversion: false)!, withName: ViolationForm.FormConstants.FormParametersNames.ConfirmSubmit.rawValue)
-        }, to: postUrl) { (sentResult) in
+        }, to: postUrl, headers: customHeaders) { (sentResult) in
             switch sentResult {
             case .failure(let encodedError):
                 self.delegate?.postedResponseFail(error: encodedError)
