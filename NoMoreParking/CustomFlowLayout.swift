@@ -32,7 +32,7 @@ class CustomFlowLayout: UICollectionViewFlowLayout, UIScrollViewDelegate {
     
     override func awakeFromNib() {
 //        super.awakeFromNib()
-        let customWidth = self.collectionView!.bounds.width * (0.6)
+        let customWidth = self.collectionView!.bounds.width * (0.7)
         let customHeight = customWidth * 1.6
         self.itemSize = CGSize(width: customWidth, height: customHeight)
         self.minimumInteritemSpacing = 10.0

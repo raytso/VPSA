@@ -69,9 +69,15 @@ class Time {
     func getAttributedTime() -> String? {
         guard (hour != nil && minute != nil) else { return nil }
         var period: String
-        let hourInt = Int(hour!)
-        let timeText = "\(hourInt!)" + " : " + "\(minute!)"
-        period = (hourInt! < 12) ? "上午 " : "下午 "
+        var hourInt = Int(hour!)!
+        
+        if hourInt < 12 {
+            period = "上午 "
+        } else {
+            period = "下午 "
+            hourInt = hourInt - 12
+        }
+        let timeText = "\(hourInt)" + " : " + "\(minute!)"
         return period + timeText
     }
     

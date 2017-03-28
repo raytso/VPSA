@@ -97,10 +97,8 @@ class CameraFeed: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapt
                 if captureSession!.canSetSessionPreset(AVCaptureSessionPresetPhoto) {
                     captureSession!.sessionPreset = AVCaptureSessionPresetPhoto
                     canSetupCamera = true
-                }
-                else {
-                    debugPrint("Cannot setup capture session preset")
-                }
+                } else { return }
+                
                 // Another preset?
             }
             if canSetupCamera {
@@ -117,23 +115,14 @@ class CameraFeed: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapt
                 captureDeviceVideoOutput.setSampleBufferDelegate(self, queue: captureDeviceOutputQueue)
                 if captureSession!.canAddOutput(captureDeviceVideoOutput) {
                     captureSession!.addOutput(captureDeviceVideoOutput)
-                } else {
-                    debugPrint("Cannot add video output")
-                    return
-                }
+                } else { return }
                 if captureSession!.canAddOutput(capturePhotoOutput) {
                     captureSession!.addOutput(capturePhotoOutput)
                 }
-                else {
-                    debugPrint("Cannot add photo output")
-                    return
-                }
+                else { return }
                 previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
                 previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
-            } else {
-                debugPrint("Cannot setup camera")
-                return
-            }
+            } else { return }
         }
     }
     
@@ -150,11 +139,6 @@ class CameraFeed: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapt
         self.captureSession?.stopRunning()
     }
     
-//    func captureImage(completion:(_ result: String) -> Void) {
-//        self.capturePhotoOutput!.capturePhoto(with: capturePhotoSettings, delegate: self)
-//        completion("Done")
-//    }
-
     func captureImage() {
         DispatchQueue.global(qos: .utility).async { [unowned self] in
             let settings = AVCapturePhotoSettings.init(format: [AVVideoCodecKey: AVVideoCodecJPEG])

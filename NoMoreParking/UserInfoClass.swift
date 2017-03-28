@@ -29,9 +29,9 @@ class UserInformation {
     }
     
     private struct DefaultUserInfo {
-        static let Name = "臺北市政府"
-        static let Address = "臺北市信義區市府路1號"
-        static let Phone = "02-27208889"
+        static let Name = "臺北市政府警察局"
+        static let Address = "臺北市中正區延平南路96號"
+        static let Phone = "(02)2331-3561"
         static let Email = "test123@example.com"
     }
 }

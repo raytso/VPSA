@@ -12,8 +12,11 @@ import CoreLocation
 class GPSManager: NSObject, CLLocationManagerDelegate
 {
     private var locationManager = CLLocationManager()
+    
     private var signalStrengthThreshold: GPSSignalStrength
+    
     var isGPSRunning: Bool = false
+    
     var signalStrength: GPSSignalStrength? {
         guard myLocation != nil else { return nil }
         if myLocation!.horizontalAccuracy.binade > 200.0 { return GPSSignalStrength.Low }
@@ -46,18 +49,20 @@ class GPSManager: NSObject, CLLocationManagerDelegate
         isGPSRunning = false
     }
     
-    func refresh() {
-        locationManager.requestLocation()
-    }
+//    func refresh() {
+//        locationManager.requestLocation()
+//    }
+//    
+//    func locationDataForAddressClass(sender: Address) -> CLLocation? {
+//        return myLocation
+//    }
     
-    func locationDataForAddressClass(sender: Address) -> CLLocation? {
-        return myLocation
-    }
+    // MARK: - CLLocationManager Delegate
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let latestLocation = locations[locations.count - 1]
-        myLocation = latestLocation
-    }
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+////        let latestLocation = locations[locations.count - 1]
+////        myLocation = latestLocation
+//    }
 }
 
 enum GPSSignalStrength {

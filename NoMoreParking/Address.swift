@@ -42,7 +42,7 @@ class Address {
     
     var districtName: String? {
         guard districtNumber != nil else { return nil}
-        return taipeiCityDistrictDictionary[districtNumber!]
+        return taipeiCityDistrictDictionary[districtNumber!] ?? placemark?.locality
     }
     
     var districtNumber: String? {
@@ -114,7 +114,6 @@ class Address {
     
     private func reverseGeoLocation(latestLocation: CLLocation?) {
         guard !isRequesting else { return }
-        
         CLGeocoder().reverseGeocodeLocation(latestLocation!, completionHandler: { (placemarks, error) -> Void in
             if error != nil {
                 debugPrint(error!)

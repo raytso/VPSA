@@ -18,7 +18,7 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var captureImageButton: UIButton!
     
     @IBAction func capturePhoto(_ captureImageButton: UIButton) {
-            self.capture.captureImage()
+        self.capture.captureImage()
     }
     @IBAction func unwindToCameraView(segue: UIStoryboardSegue) {
         
@@ -71,24 +71,6 @@ class CameraViewController: UIViewController {
                 destinaitonController.delegate = self
             }
         }
-//        else if segue.identifier == SegueIdentifiers.SubmitView {
-//            if let controller = segue.destination as? SubmitViewController {
-//                if selectedFiles == nil {
-//                    selectedFiles = []
-//                    selectedFilesInUIImage = []
-//                    for data in capturedImageDataSets.enumerated() {
-//                        var file = UploadFile()
-//                        file.content = data.element
-//                        file.fileName = "image\(data.offset).jpg"
-//                        file.fileType = UploadFileTypes.Image
-//                        selectedFiles!.append(file)
-//                        selectedFilesInUIImage!.append(UIImage(data: data.element!)!)
-//                    }
-//                }
-//                controller.filesToUpload = selectedFiles
-//                controller.convertedSelectedImages = selectedFilesInUIImage
-//            }
-//        }
     }
 }
 
@@ -101,6 +83,16 @@ extension CameraViewController: ConfirmPopoverViewControllerDelegate {
 extension CameraViewController: CameraFeedDelegate {
     func finishedRenderingCapture() {
         self.confirmButton.isHidden = false
+        DispatchQueue.main.async {
+            let shutterView = UIView(frame: UIScreen.main.bounds)
+            shutterView.backgroundColor = UIColor.black
+            self.cameraFeedView.addSubview(shutterView)
+            UIView.animate(withDuration: 0.2, animations: {
+                shutterView.alpha = 0.0
+            }, completion: { (_) in
+                shutterView.removeFromSuperview()
+            })
+        }
     }
 }
 

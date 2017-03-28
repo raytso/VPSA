@@ -17,7 +17,7 @@ class AppMenuTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        AppDelegate.gpsInstance?.startGPS()
         selectedIndex = defaultIndex
         // default
         let data = ViolationURLs(postURL: "https://www.tcpd.gov.tw/tcpd/cht/index.php?act=traffic&code=add",
@@ -58,4 +58,8 @@ class AppMenuTabBarViewController: UITabBarController {
         case History = 2
     }
 
+}
+
+struct AppData {
+    static var supportedCities: [String : ViolationURLs] = [:]
 }

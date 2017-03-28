@@ -94,8 +94,4 @@ struct ViolationURLs {
     var searchURL: String?
 }
 
-struct AppData {
-    static var supportedCities: [String : ViolationURLs] = [:]
-}
-
 

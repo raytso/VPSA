@@ -18,11 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    var navigationBarAppearance: UINavigationBar? = UINavigationBar.appearance()
     
     static let gpsInstance: GPSManager? = GPSManager(desiredSignalStrength: .Strong)
+    
+    static let defaults = UserDefaults.standard
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         UIApplication.shared.statusBarStyle = .lightContent
-        AppDelegate.gpsInstance?.startGPS()
         return true
     }
 

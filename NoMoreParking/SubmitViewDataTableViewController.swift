@@ -306,7 +306,20 @@ class SubmitViewDataTableViewController: UITableViewController, UITextFieldDeleg
     }
     
     func checkAddress() -> Bool {
+//        if address == nil {
+//            return false
+//        } else {
+//            if AppData.supportedCities[address!.city!] == nil {
+//                return false
+//            } else {
+//                ret true
+//            }
+//        }
         return (address == nil) ? false : true
+    }
+    
+    func checkSupportedCities() {
+        
     }
     
     private func trimTextForAlphanumerics(text: String) -> String {
@@ -387,7 +400,7 @@ class SubmitViewDataTableViewController: UITableViewController, UITextFieldDeleg
         view.addGestureRecognizer(tap)
         
         // Data initialization
-        userSelectedOption = ViolationOptions.Options.TempParking
+        userSelectedOption = ViolationOptions.Options.OverStopLine
         
         time = Time(data: filesToUpload?.first?.content)
         

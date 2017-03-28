@@ -11,7 +11,6 @@
 		693B1CC8914B5760F6DBA9C5 /* Pods_NoMoreParking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA461425CF4ECB05C4BB4F45 /* Pods_NoMoreParking.framework */; };
 		710428951E6D5D720016B791 /* SubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710428941E6D5D720016B791 /* SubmitViewController.swift */; };
 		7107091F1E7AE9EE0083B3E8 /* FormRequestSessionWithAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7107091E1E7AE9EE0083B3E8 /* FormRequestSessionWithAlamofire.swift */; };
-		711913611DB623A900356989 /* PhotoCaptureDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711913601DB623A900356989 /* PhotoCaptureDelegate.swift */; };
 		711E72601E700EB70098977D /* ViolationOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E725F1E700EB70098977D /* ViolationOptions.swift */; };
 		711E72621E70AAA30098977D /* UserInfoInputTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E72611E70AAA30098977D /* UserInfoInputTableViewController.swift */; };
 		711E72641E7160410098977D /* UserInfoInputTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711E72631E7160410098977D /* UserInfoInputTableView.swift */; };
@@ -26,8 +25,6 @@
 		71437FDB1E87849900168DF3 /* CheckMask.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71437FDA1E87849900168DF3 /* CheckMask.xib */; };
 		71437FDF1E87860000168DF3 /* CheckIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71437FDE1E87860000168DF3 /* CheckIconView.swift */; };
 		7143C1D71E488FA5002F4B35 /* GPS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7143C1D61E488FA5002F4B35 /* GPS.swift */; };
-		71446A1A1E6CB2580062FBEC /* OthersTemplateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71446A191E6CB2580062FBEC /* OthersTemplateTableViewCell.swift */; };
-		7144EEBF1E7D91B10020189F /* CityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7144EEBE1E7D91B10020189F /* CityData.swift */; };
 		71457A8D1E6978FC008093A2 /* CustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71457A8C1E6978FC008093A2 /* CustomFlowLayout.swift */; };
 		71480D001E5EF73A00D717A2 /* ConfirmPictureImageSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71480CFF1E5EF73A00D717A2 /* ConfirmPictureImageSelectionCollectionViewCell.swift */; };
 		715BE6621D82ECA200C0E928 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715BE6611D82ECA200C0E928 /* AppDelegate.swift */; };
@@ -38,21 +35,19 @@
 		715BE67A1D82ECA200C0E928 /* NoMoreParkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715BE6791D82ECA200C0E928 /* NoMoreParkingTests.swift */; };
 		715BE6851D82ECA200C0E928 /* NoMoreParkingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715BE6841D82ECA200C0E928 /* NoMoreParkingUITests.swift */; };
 		715BE6931D82FA6E00C0E928 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715BE6921D82FA6E00C0E928 /* CameraViewController.swift */; };
-		715F58251D8F0BE000FFFA53 /* SubmitViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715F58241D8F0BE000FFFA53 /* SubmitViewViewController.swift */; };
-		715F58271D90A8DC00FFFA53 /* LicensePlateAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715F58261D90A8DC00FFFA53 /* LicensePlateAnalyzer.swift */; };
 		715F58291D91455000FFFA53 /* ConfirmPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715F58281D91455000FFFA53 /* ConfirmPopoverViewController.swift */; };
-		715F582B1D91D6F600FFFA53 /* AppMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715F582A1D91D6F600FFFA53 /* AppMenuViewController.swift */; };
+		715F582B1D91D6F600FFFA53 /* CreditsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715F582A1D91D6F600FFFA53 /* CreditsViewController.swift */; };
 		7183C9771E85784B00DED820 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7183C9761E85784B00DED820 /* HistoryViewController.swift */; };
 		71854ED71E6C6C61007366D9 /* SubmitViewDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71854ED61E6C6C61007366D9 /* SubmitViewDataTableViewController.swift */; };
 		719264C31E72168C00764594 /* SelectedImagesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719264C21E72168C00764594 /* SelectedImagesCollectionViewController.swift */; };
 		719264C51E721B2A00764594 /* SelectedImagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719264C41E721B2A00764594 /* SelectedImagesCollectionViewCell.swift */; };
 		719626831DEC719C008D367F /* SubmitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719626821DEC719C008D367F /* SubmitData.swift */; };
-		719F8AAA1DDA1260008F7764 /* ImageAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719F8AA91DDA1260008F7764 /* ImageAnalysis.swift */; };
-		719F8AAC1DDA1274008F7764 /* ResponseDataRetrieve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719F8AAB1DDA1274008F7764 /* ResponseDataRetrieve.swift */; };
 		71A037311E1FA67D00FBCB2B /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A037301E1FA67D00FBCB2B /* Time.swift */; };
+		71A295111E8A61440074C09D /* SettingsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A295101E8A61440074C09D /* SettingsDetailViewController.swift */; };
+		71A295131E8A646E0074C09D /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A295121E8A646E0074C09D /* SettingsTableViewController.swift */; };
+		71A295151E8A7C140074C09D /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A295141E8A7C140074C09D /* StartViewController.swift */; };
 		71AB7B161E83AC9500733E20 /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AB7B151E83AC9500733E20 /* HistoryViewModel.swift */; };
 		71AB7B1A1E83AF1C00733E20 /* HistoryDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AB7B191E83AF1C00733E20 /* HistoryDataTableViewController.swift */; };
-		71AB7B1C1E83B9ED00733E20 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AB7B1B1E83B9ED00733E20 /* CoreDataController.swift */; };
 		71BEAEC31E13DE050070FDF2 /* FormStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BEAEC21E13DE050070FDF2 /* FormStructure.swift */; };
 		71BEAEC61E13E3F90070FDF2 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BEAEC51E13E3F90070FDF2 /* Address.swift */; };
 		71BEAEC81E1586F20070FDF2 /* FormRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BEAEC71E1586F20070FDF2 /* FormRequest.swift */; };
@@ -95,7 +90,6 @@
 		67BDCF2FD96D7F7FBE3E9215 /* Pods-NoMoreParking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoMoreParking.release.xcconfig"; path = "Pods/Target Support Files/Pods-NoMoreParking/Pods-NoMoreParking.release.xcconfig"; sourceTree = "<group>"; };
 		710428941E6D5D720016B791 /* SubmitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmitViewController.swift; sourceTree = "<group>"; };
 		7107091E1E7AE9EE0083B3E8 /* FormRequestSessionWithAlamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormRequestSessionWithAlamofire.swift; sourceTree = "<group>"; };
-		711913601DB623A900356989 /* PhotoCaptureDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptureDelegate.swift; sourceTree = "<group>"; };
 		711E725F1E700EB70098977D /* ViolationOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViolationOptions.swift; sourceTree = "<group>"; };
 		711E72611E70AAA30098977D /* UserInfoInputTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoInputTableViewController.swift; sourceTree = "<group>"; };
 		711E72631E7160410098977D /* UserInfoInputTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoInputTableView.swift; sourceTree = "<group>"; };
@@ -110,8 +104,6 @@
 		71437FDA1E87849900168DF3 /* CheckMask.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckMask.xib; sourceTree = "<group>"; };
 		71437FDE1E87860000168DF3 /* CheckIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckIconView.swift; sourceTree = "<group>"; };
 		7143C1D61E488FA5002F4B35 /* GPS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPS.swift; sourceTree = "<group>"; };
-		71446A191E6CB2580062FBEC /* OthersTemplateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OthersTemplateTableViewCell.swift; sourceTree = "<group>"; };
-		7144EEBE1E7D91B10020189F /* CityData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityData.swift; sourceTree = "<group>"; };
 		71457A8C1E6978FC008093A2 /* CustomFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFlowLayout.swift; sourceTree = "<group>"; };
 		71480CFF1E5EF73A00D717A2 /* ConfirmPictureImageSelectionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmPictureImageSelectionCollectionViewCell.swift; sourceTree = "<group>"; };
 		715BE65E1D82ECA200C0E928 /* NoMoreParking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoMoreParking.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,21 +120,19 @@
 		715BE6841D82ECA200C0E928 /* NoMoreParkingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMoreParkingUITests.swift; sourceTree = "<group>"; };
 		715BE6861D82ECA200C0E928 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		715BE6921D82FA6E00C0E928 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
-		715F58241D8F0BE000FFFA53 /* SubmitViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmitViewViewController.swift; sourceTree = "<group>"; };
-		715F58261D90A8DC00FFFA53 /* LicensePlateAnalyzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicensePlateAnalyzer.swift; sourceTree = "<group>"; };
 		715F58281D91455000FFFA53 /* ConfirmPopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmPopoverViewController.swift; sourceTree = "<group>"; };
-		715F582A1D91D6F600FFFA53 /* AppMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppMenuViewController.swift; sourceTree = "<group>"; };
+		715F582A1D91D6F600FFFA53 /* CreditsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditsViewController.swift; sourceTree = "<group>"; };
 		7183C9761E85784B00DED820 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		71854ED61E6C6C61007366D9 /* SubmitViewDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmitViewDataTableViewController.swift; sourceTree = "<group>"; };
 		719264C21E72168C00764594 /* SelectedImagesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedImagesCollectionViewController.swift; sourceTree = "<group>"; };
 		719264C41E721B2A00764594 /* SelectedImagesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedImagesCollectionViewCell.swift; sourceTree = "<group>"; };
 		719626821DEC719C008D367F /* SubmitData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmitData.swift; sourceTree = "<group>"; };
-		719F8AA91DDA1260008F7764 /* ImageAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAnalysis.swift; sourceTree = "<group>"; };
-		719F8AAB1DDA1274008F7764 /* ResponseDataRetrieve.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseDataRetrieve.swift; sourceTree = "<group>"; };
 		71A037301E1FA67D00FBCB2B /* Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
+		71A295101E8A61440074C09D /* SettingsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsDetailViewController.swift; sourceTree = "<group>"; };
+		71A295121E8A646E0074C09D /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		71A295141E8A7C140074C09D /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		71AB7B151E83AC9500733E20 /* HistoryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 		71AB7B191E83AF1C00733E20 /* HistoryDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryDataTableViewController.swift; sourceTree = "<group>"; };
-		71AB7B1B1E83B9ED00733E20 /* CoreDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		71BEAEC21E13DE050070FDF2 /* FormStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormStructure.swift; sourceTree = "<group>"; };
 		71BEAEC51E13E3F90070FDF2 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		71BEAEC71E1586F20070FDF2 /* FormRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormRequest.swift; sourceTree = "<group>"; };
@@ -232,11 +222,12 @@
 		715BE6601D82ECA200C0E928 /* NoMoreParking */ = {
 			isa = PBXGroup;
 			children = (
+				71A295101E8A61440074C09D /* SettingsDetailViewController.swift */,
+				71A295121E8A646E0074C09D /* SettingsTableViewController.swift */,
 				71437FDE1E87860000168DF3 /* CheckIconView.swift */,
 				7183C9761E85784B00DED820 /* HistoryViewController.swift */,
 				71FAB31A1E84F83F00A1AC0E /* AppMenuTabBarViewController.swift */,
 				71AB7B191E83AF1C00733E20 /* HistoryDataTableViewController.swift */,
-				71AB7B1B1E83B9ED00733E20 /* CoreDataController.swift */,
 				71FAB3181E84313C00A1AC0E /* HistoryViewTableViewCell.swift */,
 				71AB7B151E83AC9500733E20 /* HistoryViewModel.swift */,
 				712287E31E7FE5170086ACBA /* ResponseViewController.swift */,
@@ -253,16 +244,15 @@
 				71E862A21E6F341800698B36 /* ViolationTitleOptionsTableViewController.swift */,
 				71E8629E1E6F1A3C00698B36 /* ViolationTitleOptionsTableViewCell.swift */,
 				71854ED61E6C6C61007366D9 /* SubmitViewDataTableViewController.swift */,
-				71446A191E6CB2580062FBEC /* OthersTemplateTableViewCell.swift */,
 				710428941E6D5D720016B791 /* SubmitViewController.swift */,
 				7107091E1E7AE9EE0083B3E8 /* FormRequestSessionWithAlamofire.swift */,
 				711E725F1E700EB70098977D /* ViolationOptions.swift */,
 				71DB80711E7ED31900BA429A /* Parser.swift */,
-				7144EEBE1E7D91B10020189F /* CityData.swift */,
 				715BE6611D82ECA200C0E928 /* AppDelegate.swift */,
 				715BE6651D82ECA200C0E928 /* Main.storyboard */,
+				71A295141E8A7C140074C09D /* StartViewController.swift */,
 				7134416A1E893A820024CF31 /* AgreementViewController.swift */,
-				715F582A1D91D6F600FFFA53 /* AppMenuViewController.swift */,
+				715F582A1D91D6F600FFFA53 /* CreditsViewController.swift */,
 				715F58281D91455000FFFA53 /* ConfirmPopoverViewController.swift */,
 				71457A8C1E6978FC008093A2 /* CustomFlowLayout.swift */,
 				71480CFF1E5EF73A00D717A2 /* ConfirmPictureImageSelectionCollectionViewCell.swift */,
@@ -273,14 +263,9 @@
 				71FE79C71E66C45F00AFE422 /* SelectedMaskView.xib */,
 				712287DF1E7FB6AB0086ACBA /* ResponseView.xib */,
 				7143C1D61E488FA5002F4B35 /* GPS.swift */,
-				715F58261D90A8DC00FFFA53 /* LicensePlateAnalyzer.swift */,
-				715F58241D8F0BE000FFFA53 /* SubmitViewViewController.swift */,
 				71BEAEC41E13DFF00070FDF2 /* FormGroup */,
-				711913601DB623A900356989 /* PhotoCaptureDelegate.swift */,
 				71DF73F61D8BF8C60067E83B /* CameraViewFeed.swift */,
 				715BE6921D82FA6E00C0E928 /* CameraViewController.swift */,
-				719F8AA91DDA1260008F7764 /* ImageAnalysis.swift */,
-				719F8AAB1DDA1274008F7764 /* ResponseDataRetrieve.swift */,
 				715BE66B1D82ECA200C0E928 /* Assets.xcassets */,
 				715BE66D1D82ECA200C0E928 /* LaunchScreen.storyboard */,
 				715BE6701D82ECA200C0E928 /* Info.plist */,
@@ -406,7 +391,7 @@
 				TargetAttributes = {
 					715BE65D1D82ECA100C0E928 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = NW7PBZ8655;
+						DevelopmentTeam = HFXRHFC36Y;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -623,31 +608,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71A295111E8A61440074C09D /* SettingsDetailViewController.swift in Sources */,
 				71437FDF1E87860000168DF3 /* CheckIconView.swift in Sources */,
-				715F58271D90A8DC00FFFA53 /* LicensePlateAnalyzer.swift in Sources */,
-				71446A1A1E6CB2580062FBEC /* OthersTemplateTableViewCell.swift in Sources */,
 				712287E61E7FE57C0086ACBA /* ResponseViewModel.swift in Sources */,
-				715F58251D8F0BE000FFFA53 /* SubmitViewViewController.swift in Sources */,
 				71FAB3191E84313C00A1AC0E /* HistoryViewTableViewCell.swift in Sources */,
 				715BE66A1D82ECA200C0E928 /* NoMoreParking.xcdatamodeld in Sources */,
 				711E72661E7161210098977D /* UserInfoInputTableViewCell.swift in Sources */,
-				71AB7B1C1E83B9ED00733E20 /* CoreDataController.swift in Sources */,
 				719626831DEC719C008D367F /* SubmitData.swift in Sources */,
 				71457A8D1E6978FC008093A2 /* CustomFlowLayout.swift in Sources */,
 				71DA7AC41E7835A200A7E874 /* UserLocationMapView.swift in Sources */,
 				71480D001E5EF73A00D717A2 /* ConfirmPictureImageSelectionCollectionViewCell.swift in Sources */,
 				71DB80721E7ED31900BA429A /* Parser.swift in Sources */,
 				71A037311E1FA67D00FBCB2B /* Time.swift in Sources */,
-				719F8AAA1DDA1260008F7764 /* ImageAnalysis.swift in Sources */,
 				71AB7B161E83AC9500733E20 /* HistoryViewModel.swift in Sources */,
-				7144EEBF1E7D91B10020189F /* CityData.swift in Sources */,
 				71854ED71E6C6C61007366D9 /* SubmitViewDataTableViewController.swift in Sources */,
 				711E72681E71E5160098977D /* UserInfoClass.swift in Sources */,
+				71A295151E8A7C140074C09D /* StartViewController.swift in Sources */,
 				7183C9771E85784B00DED820 /* HistoryViewController.swift in Sources */,
 				71E8629F1E6F1A3C00698B36 /* ViolationTitleOptionsTableViewCell.swift in Sources */,
+				71A295131E8A646E0074C09D /* SettingsTableViewController.swift in Sources */,
 				7134416B1E893A820024CF31 /* AgreementViewController.swift in Sources */,
 				71FE79C61E66C29F00AFE422 /* SelectedMaskView.swift in Sources */,
-				715F582B1D91D6F600FFFA53 /* AppMenuViewController.swift in Sources */,
+				715F582B1D91D6F600FFFA53 /* CreditsViewController.swift in Sources */,
 				711E72601E700EB70098977D /* ViolationOptions.swift in Sources */,
 				71FAB31B1E84F83F00A1AC0E /* AppMenuTabBarViewController.swift in Sources */,
 				719264C51E721B2A00764594 /* SelectedImagesCollectionViewCell.swift in Sources */,
@@ -657,13 +639,11 @@
 				712287E21E7FB6EB0086ACBA /* ResponseView.swift in Sources */,
 				71BEAEC61E13E3F90070FDF2 /* Address.swift in Sources */,
 				715BE6621D82ECA200C0E928 /* AppDelegate.swift in Sources */,
-				719F8AAC1DDA1274008F7764 /* ResponseDataRetrieve.swift in Sources */,
 				71AB7B1A1E83AF1C00733E20 /* HistoryDataTableViewController.swift in Sources */,
 				711E72641E7160410098977D /* UserInfoInputTableView.swift in Sources */,
 				715BE6931D82FA6E00C0E928 /* CameraViewController.swift in Sources */,
 				712287E41E7FE5170086ACBA /* ResponseViewController.swift in Sources */,
 				71BEAEC31E13DE050070FDF2 /* FormStructure.swift in Sources */,
-				711913611DB623A900356989 /* PhotoCaptureDelegate.swift in Sources */,
 				71DA7ACC1E7915D200A7E874 /* CalloutView.swift in Sources */,
 				711E72621E70AAA30098977D /* UserInfoInputTableViewController.swift in Sources */,
 				710428951E6D5D720016B791 /* SubmitViewController.swift in Sources */,
@@ -826,14 +806,14 @@
 			baseConfigurationReference = FFFFDB72C7823641554D70C2 /* Pods-NoMoreParking.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = NW7PBZ8655;
+				DEVELOPMENT_TEAM = HFXRHFC36Y;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/Alamofire\"",
 				);
 				INFOPLIST_FILE = NoMoreParking/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.raytso.NoMoreParking;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raytso.NoMoreParkingApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -844,14 +824,14 @@
 			baseConfigurationReference = 67BDCF2FD96D7F7FBE3E9215 /* Pods-NoMoreParking.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = NW7PBZ8655;
+				DEVELOPMENT_TEAM = HFXRHFC36Y;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/Alamofire\"",
 				);
 				INFOPLIST_FILE = NoMoreParking/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.raytso.NoMoreParking;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raytso.NoMoreParkingApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

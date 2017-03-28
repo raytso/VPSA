@@ -1,26 +1,25 @@
 //
-//  AppMenuViewController.swift
+//  SettingsDetailViewController.swift
 //  NoMoreParking
 //
-//  Created by Ray Tso on 9/21/16.
-//  Copyright © 2016 Ray Tso. All rights reserved.
+//  Created by Ray Tso on 3/28/17.
+//  Copyright © 2017 Ray Tso. All rights reserved.
 //
 
 import UIKit
 
-class AppMenuViewController: UIViewController {
+class SettingsDetailViewController: UIViewController {
 
+    @IBOutlet weak var contentTextField: UITextView!
+    
+    var contents: String?
+    var navBarTitle: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let file = Bundle.main.path(forResource: "response", ofType: "txt")
-//        do {
-//            let response = try String(contentsOfFile: file!, encoding: .utf8)
-//            let result = Parser().parse(data: response, dataType: .HTML)
-//        } catch {
-//            debugPrint(error)
-//        }
-        
+        contentTextField.text = contents
+        self.title = navBarTitle
 
         // Do any additional setup after loading the view.
     }

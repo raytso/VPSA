@@ -174,7 +174,7 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
                                         carPlate: dataTableViewController!.carplateNumber!,
                                         violationTime: dataTableViewController!.time!,
                                         violationAddress: dataTableViewController!.address!,
-                                        violationType: dataTableViewController!.userSelectedOption ?? ViolationOptions.Options.TempParking)
+                                        violationType: dataTableViewController!.userSelectedOption ?? ViolationOptions.Options.OverStopLine)
         session = FormRequestSessionWithAlamofire(formData: submitForm!, files: filesToUpload!)
         session?.delegate = self
         return (true, nil)
@@ -195,6 +195,7 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
         if !dataTableViewController!.checkAddress() {
             missingFields.append(AlertConstants.ErrorConst.Location)
         }
+        
         return missingFields.isEmpty ? (true, nil) : (false, missingFields)
     }
     
@@ -472,8 +473,15 @@ extension SubmitViewController: AddressClassDelegate {
 extension SubmitViewController: VPSAAnnotationDelegate {
     func userDidVerify(selected: Bool) {
         if selected {
-            if let newAddress = userPinnedLocationAddress?.getShortAddress() {
-                dataTableViewController?.updateAddressCell(newAddress: newAddress, addressClass: userPinnedLocationAddress!)
+            if let city = userPinnedLocationAddress?.city {
+                if AppData.supportedCities[city] != nil {
+                    let newAddress = userPinnedLocationAddress!.getShortAddress()
+                    dataTableViewController?.updateAddressCell(newAddress: newAddress!, addressClass: userPinnedLocationAddress!)
+                } else {
+                    let alert = UIAlertController.init(title: "糟糕", message: "\n很抱歉！本系統目前尚未支援此城市，請等之後版本更新有支援後再使用，謝謝！", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction.init(title: "確認", style: .default, handler: nil))
+                    present(alert, animated: true, completion: nil)
+                }
             }
         }
         mapView.deselectAnnotation(mapView.userPinnedAnnotation, animated: true)

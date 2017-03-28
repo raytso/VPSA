@@ -16,7 +16,7 @@ class UserInfoInputTableViewController: UITableViewController {
     
     // MARK: - Properties
     
-    var userInfo: UserInformation? = UserInformation()
+    var userInfo = UserInformation()
     
     struct CellIdentifiers {
         static let UserInfoType = "userInfoType"
@@ -45,22 +45,22 @@ class UserInfoInputTableViewController: UITableViewController {
         switch indexPath.row {
         case 0:
             cell?.textLabel?.text = "姓名"
-            cell?.detailTextLabel?.text = userInfo?.name
+            cell?.detailTextLabel?.text = userInfo.name
         case 1:
             cell?.textLabel?.text = "地址"
-            cell?.detailTextLabel?.text = userInfo?.address
+            cell?.detailTextLabel?.text = userInfo.address
         case 2:
             cell?.textLabel?.text = "電話"
-            cell?.detailTextLabel?.text = userInfo?.phone
+            cell?.detailTextLabel?.text = userInfo.phone
         case 3:
             cell?.textLabel?.text = "電子郵件"
-            cell?.detailTextLabel?.text = userInfo?.email
+            cell?.detailTextLabel?.text = userInfo.email
         default:
             break
         }
-        cell?.textLabel?.textColor = UIColor.lightGray
+        cell?.textLabel?.textColor = UIColor.black
         cell?.textLabel?.font = UIFont.boldSystemFont(ofSize: 16.0)
-        cell?.detailTextLabel?.textColor = UIColor.lightGray
+        cell?.detailTextLabel?.textColor = UIColor.black
         cell?.detailTextLabel?.font = UIFont.systemFont(ofSize: 14.0)
         cell?.detailTextLabel?.adjustsFontSizeToFitWidth = true
         return cell!
