@@ -399,15 +399,7 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
     struct SegueIdentifiers {
         static let ResponseView = "ResponseViewPresentIdentifier"
         static let Unwind = "unwindToCameraView"
-        static let Exit = "exitToCamera"
     }
-    
-//    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-//        if identifier == SegueIdentifiers.ResponseView {
-//            guard isFormReady() else { return false }
-//        }
-//        return true
-//    }
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -456,7 +448,6 @@ extension SubmitViewController: SubmitViewAllFieldsFilledDelegate {
 extension SubmitViewController: SubmitViewTableViewScrollDelegate {
     func scrollToMapView() {
         isTableViewScrolledToTop = true
-        debugPrint("scrolled to top, now find a way to pan down")
     }
 
     func tableViewScrolledToTop(sender: SubmitViewDataTableViewController) {

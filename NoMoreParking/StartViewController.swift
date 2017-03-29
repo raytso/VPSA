@@ -24,6 +24,7 @@ class StartViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         defaults.set(["zh_Hant_TW"], forKey: "AppleLanguages")
+        agreed = defaults.bool(forKey: UserDefaultKeys.UserAgreement)
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -83,11 +83,6 @@ class FormRequestSessionWithAlamofire {
                 self.delegate?.postedResponseFail(error: encodedError)
             case .success(request: let upload, streamingFromDisk: _, streamFileURL: _):
                 upload.responseString(completionHandler: { (response) in
-//                    if let response = response.value {
-//                        self.delegate?.postedResponseSuccess(response: response.value!)
-//                    } else {
-//                        
-//                    }
                     switch response.result {
                     case .failure(let error):
                         self.delegate?.postedResponseFail(error: error)

@@ -23,9 +23,7 @@ class GPSManager: NSObject, CLLocationManagerDelegate
         else if myLocation!.horizontalAccuracy > 80.0 { return GPSSignalStrength.Moderate }
         else { return GPSSignalStrength.Strong }
     }
-//    weak var address: Address? {
-//        didSet { address?.dataSource = self }
-//    }
+
     private var myLocation: CLLocation?
     
     var currentGPSLocation: CLLocation? {
@@ -49,20 +47,12 @@ class GPSManager: NSObject, CLLocationManagerDelegate
         isGPSRunning = false
     }
     
-//    func refresh() {
-//        locationManager.requestLocation()
-//    }
-//    
-//    func locationDataForAddressClass(sender: Address) -> CLLocation? {
-//        return myLocation
-//    }
-    
     // MARK: - CLLocationManager Delegate
     
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-////        let latestLocation = locations[locations.count - 1]
-////        myLocation = latestLocation
-//    }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let latestLocation = locations[locations.count - 1]
+        myLocation = latestLocation
+    }
 }
 
 enum GPSSignalStrength {
