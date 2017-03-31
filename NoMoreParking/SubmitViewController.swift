@@ -51,6 +51,7 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
                                    span: .init(latitudeDelta: CLLocationDegrees.abs(0.002),
                                                longitudeDelta: CLLocationDegrees.abs(0.002)))
             mapView.showsUserLocation = true
+            mapView.userPinnedAnnotation = userLocationAnnotation
         }
     }
     
@@ -115,6 +116,14 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
     var userPinnedLocationAddress: Address?
     
     var isTableViewScrolledToTop: Bool = true
+    
+    let userPosition = AppDelegate.gpsInstance?.currentGPSLocation?.coordinate
+    
+    let userLocationAnnotation: MKPointAnnotation = {
+        let annotation = MKPointAnnotation()
+        annotation.title = " "
+        return annotation
+    }()
     
     private let systemTriggeredPan = UIPanGestureRecognizer()
     
@@ -300,6 +309,10 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
         recognizer.setTranslation(CGPoint.zero, in: self.view)
     }
     
+    func updatePinAddressLocation(annotation: MKAnnotation) {
+        userPinnedLocation = annotation.coordinate
+    }
+    
     // MARK: - UIGestureRecognizerDelegate
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -310,7 +323,11 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
-        if annotation is MKUserLocation { return nil }
+        if annotation is MKUserLocation {
+            let blueDot = mapView.view(for: mapView.userLocation)
+            blueDot?.isEnabled = false
+            return nil
+        }
         
         var view = mapView.dequeueReusableAnnotationView(withIdentifier: SubmitViewConstants.AnnotationViewReuseIdentifier)
         
@@ -322,18 +339,31 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
         }
         userPinnedLocation = annotation.coordinate
         view?.detailCalloutAccessoryView = detailedCallout
+        
+        view?.isDraggable = true
         return view
     }
     
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState) {
+        switch newState {
+//        case .starting:
+//            view.dragState = .dragging
+        case .ending:
+            view.dragState = .none
+            updatePinAddressLocation(annotation: view.annotation!)
+        default: break
+        }
+    }
+    
     func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
-        let blueDot = mapView.view(for: mapView.userLocation)
-        blueDot?.isEnabled = false
         guard self.userPinnedLocation != nil else { return }
         self.mapView.prepareToShowAnnotationView(annotation: self.mapView.userPinnedAnnotation!)
     }
     
     func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
         AppDelegate.gpsInstance?.stopGPS()
+        guard self.userPinnedLocation != nil else { return }
+        self.mapView.prepareToShowAnnotationView(annotation: self.mapView.userPinnedAnnotation!)
     }
     
     // MARK: - ViolationFormMetadata DataSource
@@ -366,6 +396,7 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
         panningGesture!.delegate = self
         
         self.navigationItem.hidesBackButton = true
+        
         // initial position
         setTableViewFrame()
         
@@ -381,9 +412,14 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
         setupAlertAction(alert: discardDataAlert)
         setupAlertAction(alert: submitCheckAlert)
         
-        
         UIApplication.shared.statusBarStyle = .default
-//        self.detailedCallout = VPSAAnnotationCalloutView.init(frame: CGRect( )
+        
+        // Set map initial location
+        userLocationAnnotation.coordinate = userPosition!
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     private func addShadow(layer: CALayer) {

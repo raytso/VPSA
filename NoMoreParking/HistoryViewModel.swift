@@ -26,7 +26,6 @@ class HistoryViewModel {
     
     func addSingleData(file: CaseStructure) {
         let newData = HistoryDataStructure(context: context)
-//        let newData = HistoryDataStructure(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
         newData.carplateNumber = file.carplateNumber
         newData.caseID = file.caseID
         newData.serialNumber = file.serialNumber
@@ -43,14 +42,12 @@ class HistoryViewModel {
     
     func deleteData(target: HistoryDataStructure) {
         context.delete(target)
-//        (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext.delete(target)
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
     func fetchCoreData() -> [HistoryDataStructure]? {
         do {
             dataArray = try context.fetch(HistoryDataStructure.fetchRequest())
-//            dataArray = try (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext.fetch(HistoryDataStructure.fetchRequest())
             return dataArray?.reversed()
         } catch {
             debugPrint(error)

@@ -306,15 +306,6 @@ class SubmitViewDataTableViewController: UITableViewController, UITextFieldDeleg
     }
     
     func checkAddress() -> Bool {
-//        if address == nil {
-//            return false
-//        } else {
-//            if AppData.supportedCities[address!.city!] == nil {
-//                return false
-//            } else {
-//                ret true
-//            }
-//        }
         return (address == nil) ? false : true
     }
     
@@ -323,6 +314,12 @@ class SubmitViewDataTableViewController: UITableViewController, UITextFieldDeleg
     }
     
     private func trimTextForAlphanumerics(text: String) -> String {
+//        let newText = text.
+//        let pattern = "[0-9a-z]{\(text.characters.count)}"
+//        let search = text.range(of: pattern, options: .regularExpression)
+//        if search == nil {
+//            return text
+//        }
         return text.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
     }
     

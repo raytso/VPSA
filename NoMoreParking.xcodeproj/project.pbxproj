@@ -806,6 +806,7 @@
 			baseConfigurationReference = FFFFDB72C7823641554D70C2 /* Pods-NoMoreParking.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = HFXRHFC36Y;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -824,6 +825,7 @@
 			baseConfigurationReference = 67BDCF2FD96D7F7FBE3E9215 /* Pods-NoMoreParking.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = HFXRHFC36Y;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

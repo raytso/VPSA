@@ -93,7 +93,6 @@ class HistoryDataTableViewController: UITableViewController {
             cell.serialNumber.text = data.serialNumber
             cell.caseStatusType = CaseStatus(rawValue: Int(data.state))!
             cell.caseType.text = data.caseType
-            debugPrint(data)
         }
         // Configure the cell...
         return cell

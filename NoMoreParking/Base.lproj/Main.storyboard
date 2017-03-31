@@ -231,7 +231,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="camera_white" selectedImage="camera_white" id="7gi-Sx-KJ4">
-                        <inset key="imageInsets" minX="-2" minY="5" maxX="-2" maxY="-10"/>
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
                     </tabBarItem>
                     <connections>
                         <outlet property="cameraFeedView" destination="njr-48-lnk" id="tDd-QF-Hqk"/>
@@ -1437,7 +1437,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8gg-zK-s7D" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="cog" id="yaB-XH-FVK">
-                        <inset key="imageInsets" minX="1" minY="10" maxX="3" maxY="-5"/>
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gt1-pO-97g">
