@@ -30,6 +30,10 @@ class ConfirmPopoverViewController: UIViewController, UICollectionViewDataSource
     
     weak var delegate: ConfirmPopoverViewControllerDelegate?
     
+    var blurEffectView: UIVisualEffectView?
+    
+    var blurEffect: UIBlurEffect?
+    
     private var selectedUIImageSets: [UIImage] = []
     
     private var capturedImageDataSets: [Data]? {
@@ -135,29 +139,40 @@ class ConfirmPopoverViewController: UIViewController, UICollectionViewDataSource
         return true
     }
     
+    private func backgroundBlur(effect: UIBlurEffect) {
+        blurEffectView?.effect = effect
+    }
+
+    
     // MARK: - Application Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view.
+        // Blur Effect
+        if !UIAccessibilityIsReduceTransparencyEnabled() {
+            //            self.view.backgroundColor = UIColor.clear
+            //
+            //            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+            //            let blurEffectView = UIVisualEffectView(effect: blurEffect)
+            //            //Fill view
+            //            blurEffectView.frame = self.view.bounds
+            //            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            //
+            //            self.view.insertSubview(blurEffectView, at: 0)
+            self.view.backgroundColor = UIColor.clear
+            blurEffectView = UIVisualEffectView(effect: blurEffect)
+            blurEffectView?.frame = self.view.bounds
+            blurEffectView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            self.view.insertSubview(blurEffectView!, at: 0)
+        } else {
+            self.view.backgroundColor = UIColor.black
+        }
+        
         capturedImageDataSets = cameraFeed?.getCapturedImageDataSets(sender: self)
         imageCollectionView.contentInset = UIEdgeInsetsMake(-20.0, 0.0, 0.0, 0.0)
         self.automaticallyAdjustsScrollViewInsets = false
         self.imageCollectionView.decelerationRate = UIScrollViewDecelerationRateFast
-        
-        // Blur Effect
-        if !UIAccessibilityIsReduceTransparencyEnabled() {
-            self.view.backgroundColor = UIColor.clear
-            
-            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
-            let blurEffectView = UIVisualEffectView(effect: blurEffect)
-            //Fill view
-            blurEffectView.frame = self.view.bounds
-            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            
-            self.view.insertSubview(blurEffectView, at: 0)
-        } else {
-            self.view.backgroundColor = UIColor.black
-        }
         
         // Navigation bar
         navBar.setBackgroundImage(UIImage(), for: .default)
@@ -165,15 +180,16 @@ class ConfirmPopoverViewController: UIViewController, UICollectionViewDataSource
         navBar.isTranslucent = true
         navBar.backgroundColor = UIColor.clear
 //        self.navigationController?.view.backgroundColor = UIColor.clear
-        
-        
-        updateUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
         filesToUpload = []
+        let effect = UIBlurEffect(style: .dark)
+        UIView.animate(withDuration: 0.5) {
+            self.backgroundBlur(effect: effect)
+        }
+        updateUI()
     }
     
     // MARK: - Navigation

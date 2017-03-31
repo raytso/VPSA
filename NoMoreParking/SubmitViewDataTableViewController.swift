@@ -342,10 +342,14 @@ class SubmitViewDataTableViewController: UITableViewController, UITextFieldDeleg
     }
     
     func updateAddressCell(newAddress: String, addressClass: Address) {
-        self.otherLocationLabel.text = newAddress
-        self.otherLocationLabel.textColor = UIColor.black
-        self.address = addressClass
-        checkAllInputFields()
+        DispatchQueue.main.async { [unowned self] in
+            self.otherLocationLabel.text = newAddress
+            self.otherLocationLabel.textColor = UIColor.black
+            self.address = addressClass
+            DispatchQueue.global().async { [unowned self] in
+                self.checkAllInputFields()
+            }
+        }
     }
     
     func updateContainerViewVisibility(desired: Visibility, forView: UIView) {

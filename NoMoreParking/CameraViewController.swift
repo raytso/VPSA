@@ -34,7 +34,6 @@ class CameraViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         confirmButton.isHidden = true
-//        submitButton.isHidden = true
         capture.delegate = self
         capture.setupCameraSettings(cameraType: .BackCamera, cameraPreviewFrameSize: UIScreen.main.bounds)
         

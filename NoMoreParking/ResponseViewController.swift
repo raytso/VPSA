@@ -54,7 +54,6 @@ class ResponseViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        // Hide cancel button
         super.viewWillAppear(animated)
         let effect = UIBlurEffect(style: .dark)
         UIView.animate(withDuration: 0.5) { 
@@ -68,7 +67,6 @@ class ResponseViewController: UIViewController {
 extension ResponseViewController: ResponseViewDelegate {
     func userDismissedView() {
         self.delegate?.userForcedExit(state: state)
-//        performSegue(withIdentifier: SegueIdentifiers.BackToForm, sender: nil)
         self.dismiss(animated: true, completion: nil)
     }
 }

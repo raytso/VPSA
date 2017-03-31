@@ -153,6 +153,11 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
         }
     }
     
+    enum TableViewPosition {
+        case Top
+        case Bottom
+    }
+    
     // MARK: - UDFs
     
     private func backToCamera() {
@@ -173,7 +178,6 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
             alert.addAction(proceed)
         default: break
         }
-        
     }
     
     private func prepareToPost() -> (Bool, [String]?) {
@@ -194,7 +198,7 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
         return true
     }
     
-    private func checkAllFieldsFilled() -> (Bool, [String]?) {
+    func checkAllFieldsFilled() -> (Bool, [String]?) {
         var missingFields: [String] = []
         // check all fields
         // even whether user selected location is valid
@@ -231,10 +235,7 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
             self.mapViewMask.alpha = self.mapViewMaskValue(position: position)
             self.tableViewContainerView.frame = CGRect(x: 0.0, y: position, width: frame.width, height: frame.height)
         }) { _ in
-            if position == SubmitViewConstants.TableViewTopPosition {
-                // enable scroll
-                self.dataTableViewController?.tableView.isScrollEnabled = true
-            }
+            self.dataTableViewController?.tableView.isScrollEnabled = (position == SubmitViewConstants.TableViewTopPosition) ? true : false
         }
     }
     
@@ -309,6 +310,19 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
         recognizer.setTranslation(CGPoint.zero, in: self.view)
     }
     
+//    func pullDataTableview(position: TableViewPosition) {
+//        switch position {
+//        case .Top:
+//            UIView.animate(withDuration: 0.2, animations: {
+//                self.dataTableViewController?.view.frame.origin = CGPoint(x: 0.0, y: SubmitViewConstants.TableViewTopPosition)
+//            }, completion: nil)
+//        case .Bottom:
+//            UIView.animate(withDuration: 0.2, animations: {
+//                self.dataTableViewController?.view.frame.origin = CGPoint(x: 0.0, y: SubmitViewConstants.TableViewTopPosition)
+//            }, completion: nil)
+//        }
+//    }
+    
     func updatePinAddressLocation(annotation: MKAnnotation) {
         userPinnedLocation = annotation.coordinate
     }
@@ -323,11 +337,7 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
-        if annotation is MKUserLocation {
-            let blueDot = mapView.view(for: mapView.userLocation)
-            blueDot?.isEnabled = false
-            return nil
-        }
+        if annotation is MKUserLocation { return nil }
         
         var view = mapView.dequeueReusableAnnotationView(withIdentifier: SubmitViewConstants.AnnotationViewReuseIdentifier)
         
@@ -346,8 +356,6 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState) {
         switch newState {
-//        case .starting:
-//            view.dragState = .dragging
         case .ending:
             view.dragState = .none
             updatePinAddressLocation(annotation: view.annotation!)
@@ -356,6 +364,8 @@ class SubmitViewController: UIViewController, UIGestureRecognizerDelegate, MKMap
     }
     
     func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
+        let blueDot = mapView.view(for: mapView.userLocation)
+        blueDot?.isEnabled = false
         guard self.userPinnedLocation != nil else { return }
         self.mapView.prepareToShowAnnotationView(annotation: self.mapView.userPinnedAnnotation!)
     }
@@ -471,11 +481,13 @@ struct SubmitViewConstants {
 extension SubmitViewController: SubmitViewAllFieldsFilledDelegate {
     func allFieldsAreFilled() {
         // Show send button with animation
-        if sendFormButton.isHidden {
-            sendFormButton.alpha = 0.0
-            UIView.animate(withDuration: 0.3) { 
-                self.sendFormButton.alpha = 1.0
-                self.sendFormButton.isHidden = false
+        DispatchQueue.main.async { [unowned self] in
+            if self.sendFormButton.isHidden {
+                self.sendFormButton.alpha = 0.0
+                UIView.animate(withDuration: 0.3) {
+                    self.sendFormButton.alpha = 1.0
+                    self.sendFormButton.isHidden = false
+                }
             }
         }
     }
@@ -484,6 +496,7 @@ extension SubmitViewController: SubmitViewAllFieldsFilledDelegate {
 extension SubmitViewController: SubmitViewTableViewScrollDelegate {
     func scrollToMapView() {
         isTableViewScrolledToTop = true
+        snapTableViewToPosition(position: SubmitViewConstants.TableViewInitialOriginY)
     }
 
     func tableViewScrolledToTop(sender: SubmitViewDataTableViewController) {
@@ -502,8 +515,15 @@ extension SubmitViewController: VPSAAnnotationDelegate {
         if selected {
             if let city = userPinnedLocationAddress?.city {
                 if AppData.supportedCities[city] != nil {
-                    let newAddress = userPinnedLocationAddress!.getShortAddress()
-                    dataTableViewController?.updateAddressCell(newAddress: newAddress!, addressClass: userPinnedLocationAddress!)
+                    DispatchQueue.global().async { [unowned self] in
+                        let newAddress = self.userPinnedLocationAddress!.getShortAddress()
+                        self.dataTableViewController?.updateAddressCell(newAddress: newAddress!, addressClass: self.userPinnedLocationAddress!)
+                    }
+                    snapTableViewToPosition(position: SubmitViewConstants.TableViewTopPosition)
+                    let result = dataTableViewController?.checkCarPlate()
+                    if !result! {
+                        dataTableViewController?.userInputFrontCarPlateTextField.becomeFirstResponder()
+                    }
                 } else {
                     let alert = UIAlertController.init(title: "糟糕", message: "\n很抱歉！本系統目前尚未支援此城市，請等之後版本更新有支援後再使用，謝謝！", preferredStyle: .alert)
                     alert.addAction(UIAlertAction.init(title: "確認", style: .default, handler: nil))
