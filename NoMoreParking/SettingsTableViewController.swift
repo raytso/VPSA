@@ -10,6 +10,18 @@ import UIKit
 
 class SettingsTableViewController: UITableViewController {
 
+    @IBOutlet weak var autoKeyboardSwitch: UISwitch! {
+        didSet {
+            autoKeyboardSwitch.isOn = UserDefaults.standard.bool(forKey: "shouldBringKeyboard")
+        }
+    }
+    
+    @IBAction func toggleAutoKeyboardSwitch(_ sender: Any) {
+        autoKeyboardSwitch.isOn = autoKeyboardSwitch.isOn ? false : true
+        UserDefaults.standard.set(autoKeyboardSwitch.isOn ? true : false, forKey: "shouldBringKeyboard")
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

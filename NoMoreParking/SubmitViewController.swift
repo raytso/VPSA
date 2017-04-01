@@ -520,9 +520,11 @@ extension SubmitViewController: VPSAAnnotationDelegate {
                         self.dataTableViewController?.updateAddressCell(newAddress: newAddress!, addressClass: self.userPinnedLocationAddress!)
                     }
                     snapTableViewToPosition(position: SubmitViewConstants.TableViewTopPosition)
-                    let result = dataTableViewController?.checkCarPlate()
-                    if !result! {
-                        dataTableViewController?.userInputFrontCarPlateTextField.becomeFirstResponder()
+                    if UserDefaults.standard.bool(forKey: "shouldBringKeyboard") {
+                        let result = dataTableViewController?.checkCarPlate()
+                        if !result! {
+                            dataTableViewController?.userInputFrontCarPlateTextField.becomeFirstResponder()
+                        }
                     }
                 } else {
                     let alert = UIAlertController.init(title: "糟糕", message: "\n很抱歉！本系統目前尚未支援此城市，請等之後版本更新有支援後再使用，謝謝！", preferredStyle: .alert)

@@ -151,15 +151,6 @@ class ConfirmPopoverViewController: UIViewController, UICollectionViewDataSource
         // Do any additional setup after loading the view.
         // Blur Effect
         if !UIAccessibilityIsReduceTransparencyEnabled() {
-            //            self.view.backgroundColor = UIColor.clear
-            //
-            //            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
-            //            let blurEffectView = UIVisualEffectView(effect: blurEffect)
-            //            //Fill view
-            //            blurEffectView.frame = self.view.bounds
-            //            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            //
-            //            self.view.insertSubview(blurEffectView, at: 0)
             self.view.backgroundColor = UIColor.clear
             blurEffectView = UIVisualEffectView(effect: blurEffect)
             blurEffectView?.frame = self.view.bounds

@@ -87,7 +87,7 @@ class VPSAAnnotationCalloutView: UIView {
     
     struct Constants {
         static let Waiting = "等候網路..."
-        static let Error = "地址錯誤，請選擇其他地址"
+        static let Error = "司服器錯誤，請稍候再試"
     }
     
     // MARK: - Initialization

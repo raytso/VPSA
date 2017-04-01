@@ -286,11 +286,7 @@ class SubmitViewDataTableViewController: UITableViewController, UITextFieldDeleg
     }
     
     private func checkValidInput(input: String) -> Bool{
-        let newText = trimTextForAlphanumerics(text: input)
-        if newText.isEmpty || (newText.characters.count != input.characters.count) {
-            return false
-        }
-        return true
+        return input.isAlphanumerics ? true : false
     }
     
     func checkCarPlate() -> Bool {
@@ -311,16 +307,6 @@ class SubmitViewDataTableViewController: UITableViewController, UITextFieldDeleg
     
     func checkSupportedCities() {
         
-    }
-    
-    private func trimTextForAlphanumerics(text: String) -> String {
-//        let newText = text.
-//        let pattern = "[0-9a-z]{\(text.characters.count)}"
-//        let search = text.range(of: pattern, options: .regularExpression)
-//        if search == nil {
-//            return text
-//        }
-        return text.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
     }
     
     private func addShadow(layer: CALayer, height: ShadowPosition, isTitle: Bool) {
@@ -563,6 +549,18 @@ class SubmitViewDataTableViewController: UITableViewController, UITextFieldDeleg
             imageCollectionViewController = controller
             imageCollectionViewController?.imageSet = convertedSelectedImages
         }
+    }
+}
+
+private extension String {
+    var isAlphanumerics: Bool {
+        let alphabets = "abcdefghijklmnopqrstuvwxyz"
+        let numbers  = "0123456789"
+        let filter = CharacterSet(charactersIn: numbers + alphabets + alphabets.uppercased()).inverted
+        let result = self.unicodeScalars.contains {
+            filter.contains($0)
+        }
+        return result ? false : true
     }
 }
 

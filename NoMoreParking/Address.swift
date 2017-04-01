@@ -116,7 +116,7 @@ class Address {
         guard !isRequesting else { return }
         CLGeocoder().reverseGeocodeLocation(latestLocation!, completionHandler: { (placemarks, error) -> Void in
             if error != nil {
-                debugPrint(error!)
+                self.delegate?.geocodeRecieved(succeeded: false)
                 return
             }
             if (placemarks?.count)! > 0 {
